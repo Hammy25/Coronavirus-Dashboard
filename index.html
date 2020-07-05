@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<link rel="icon" href="img/hm_favicon.ico" type="image/ico" sizes="16x16">
+		<link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet"> 
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<script src="https://kit.fontawesome.com/4cf7efc90c.js" crossorigin="anonymous"></script>
+		<title>Coronavirus Stats</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-light bg-light">
+			<a class="navbar-brand" href="#">
+				<img src="img/hm_logo.png" width="30" height="30" class="d-inline-block align-top" alt="Hammerton Mwawuda Logo">
+				Coronavirus Stats
+			</a>
+		</nav>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-8 offset-md-2 col-sm-12">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<select id="var-select" class="form-control">
+								<option selected value="new_cases">New Cases</option>
+								<option value="new_deaths">New Deaths</option>
+								<option value="new_tests">New Tests</option>
+								<option value="total_cases">Total Cases</option>
+								<option value="total_deaths">Total Deaths</option>
+								<option value="total_tests">Total Tests</option>
+							</select>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<select id="country-select" class="form-control">
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12" id="bar-parent">
+					<div id="bar"></div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12" id="more-info">
+					<h2 id="more-info-heading">More Information</h2>
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<div id="general-info">
+								<h3 id="general-heading"></h3>
+								<i class="fas fa-globe"> </i><p> Continent: <span id="continent"></span></p>
+								<i class="material-icons">person</i><p> Population: <span id="population"></span></p>
+								<i class="material-icons">person_add</i><p> Population Density: <span id="pop-den"></span></p>
+								<i class="far fa-life-ring"></i><p> Life Expectancy: <span id="life"></span></p>
+								<i class="material-icons">unfold_less</i><p> Median Age: <span id="median-age"></span></p>
+								<i class="fas fa-walking"></i><p> 65 Older: <span id="65-older"></span>%</p>
+								<i class="material-icons">directions_walk</i><p> 70 Older: <span id="70-older"></span>%</p>
+								<i class="fas fa-money-bill-wave-alt"></i><p> GDP per Capita: <span id="gdp"></span></p>
+								<i class="fas fa-hands-wash"></i><p> Handwashing Facilities Access: <span id="handwash"></span>%</p>
+								<i class="fas fa-bed"></i><p> Hospital Beds per Thousand: <span id="beds"></span></p>
+								<i class="far fa-money-bill-alt"></i><p> Extreme Poverty: <span id="poverty"></span>%</p>
+								<i class="material-icons">people</i><p> Diabetes prevalence: <span id="diabetes"></span></p>
+								<i class="fas fa-calendar-plus"></i><p> Cardiovascular Disease Death Rate: <span id="cvd"></span></p>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12" id="smokers-parent">
+							<div id="smokers">
+							</div>
+							<div id="about-page">
+								<h3 id="about-heading">About</h3>
+								<p>The information presented on this page comes from data obtained by <a target="_blank" href="https://ourworldindata.org/">ourworldindata.org</a>.</p>
+								<p><a target="_blank" href="https://ourworldindata.org/">Ourworldindata.org</a> collects data to aid in solving worldwide problems. Their goal is to make knowledge about universal issues accessible and comprehensible.</p>
+								<p>Toggle the selectors on the top of the page to view information on Covid-19 per nation or the world as a whole.</p>
+								<p>Source of data: <a target="_blank" href="https://github.com/owid">Ourworldindata (owid) Coronavirus GitHub repo</a>.</p>
+								<p>More information on the data: <a target="_blank" href="https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-data-codebook.md">More info</a>.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery-3.5.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/d3.min.js"></script>
+		<script src="js/bar.js"></script>
+		<script src="js/pie.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>
