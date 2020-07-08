@@ -27,18 +27,19 @@ const editInformation = (d) => {
 	}else{
 		$("#continent").text(d.continent);
 	}
-	$("#population").text(d.population);
-	$("#pop-den").text(d.population_density);
-	$("#median-age").text(d.median_age);
-	$("#65-older").text(d.aged_65_older);
-	$("#70-older").text(d.aged_70_older);
-	$("#gdp").text(d.gdp_per_capita);
-	$("#handwash").text(d.handwashing_facilities);
-	$("#beds").text(d.hospital_beds_per_thousand);
-	$("#poverty").text(d.extreme_poverty);
-	$("#diabetes").text(d.diabetes_prevalence);
-	$("#life").text(d.life_expectancy);
-	$("#cvd").text(d.cvd_death_rate);
+	console.log(d);
+	$("#population").text(typeof d.population == undefined ? "N/A" : d.population);
+	$("#pop-den").text(typeof d.population_density === undefined ? "N/A" : d.population_density);
+	$("#median-age").text(typeof d.median_age === undefined ? "N/A" : d.median_age);
+	$("#65-older").text(typeof d.aged_65_older === undefined ? "N/A" : d.aged_65_older);
+	$("#70-older").text(typeof d.aged_70_older === undefined ? "N/A" : d.aged_70_older);
+	$("#gdp").text(typeof d.gdp_per_capita === undefined ? "N/A" : d.gdp_per_capita);
+	$("#handwash").text(typeof d.handwashing_facilities === undefined ? "N/A" : d.handwashing_facilities);
+	$("#beds").text(typeof d.hospital_beds_per_thousand === undefined ? "N/A" : d.hospital_beds_per_thousand);
+	$("#poverty").text(typeof d.extreme_poverty === undefined ? "N/A" : d.extreme_poverty);
+	$("#diabetes").text(typeof d.diabetes_prevalence === undefined ? "N/A" : d.diabetes_prevalence);
+	$("#life").text(typeof d.life_expectancy === undefined ? "N/A" : d.life_expectancy);
+	$("#cvd").text(typeof d.cvd_death_rate === undefined ? "N/A" : d.cvd_death_rate);
 	$("#general-heading").text(d.location + " General Information")
 };
 

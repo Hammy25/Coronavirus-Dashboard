@@ -1,7 +1,6 @@
 # CORONAVIRUS STATISTICS DASHBOARD
----
+
 ## Introduction
----
 
 Last week I set out to create a visual dashboard of Coronavirus statistics. I wanted to create a simple dashboard where a user can view statistics about every country in relation to the current on going coronavirus pandemic. This repository contains code used to generate the dashboard.
 
@@ -18,12 +17,12 @@ The dashboard consists of four (4) displays:
 4. About – Contains short paragraphs explaining the sources of data and how to use the dashboard.
 
 ## Screenshots
----
+
 ![Bar Chart](./img/screenshot-1.png "Bar Chart.")
 
 ![More Information](./img/screenshot-2.png "General Information, Smokers’ Distribution and About displays.")
 
 ## Website
----
+
 View at: [coronavirus.hmwawuda.com](https://coronavirus.hmwawuda.com)
 
