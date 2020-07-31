@@ -6,8 +6,10 @@ Code for Donut Chart
 class DonutChart{
 
 	// Constructor
-	constructor(_parentElement){
+	constructor(_parentElement, _width, _height){
 		this.parentElement = _parentElement;
+		this.svgWidth = _width;
+		this.svgHeight = _height;
 
 		this.initializeChart();
 	}
@@ -18,8 +20,8 @@ class DonutChart{
 
 		// Define constants
 		vis.margin = {top: 20, right: 0, bottom: 20, left: 40};
-		vis.height = 130;
-		vis.width = 300;
+		vis.height = vis.svgHeight - vis.margin.top - vis.margin.bottom;
+		vis.width = vis.svgWidth - vis.margin.left - vis.margin.right;
 		vis.radius = Math.min(vis.width, vis.height)/2;
 
 		 // Transitions
@@ -29,7 +31,7 @@ class DonutChart{
 		// Select area and append chart
 		vis.svg = d3.select(vis.parentElement).append("svg")
 						 .attr("preserveAspectRatio", "xMinYMin meet")
-                         .attr("viewBox", "0 0 340 170")
+                         .attr("viewBox", "0 0 " + vis.svgWidth + " " + vis.svgHeight)
                          .classed(".svg-content", true);
 
 		vis.donut = vis.svg.append("g")
@@ -132,8 +134,8 @@ class DonutChart{
 	    vis.pieLegend.append("text")
 	           .attr("x", 20)
 	           .attr("y", 10)
+	           .attr("class", "text-muted")
 	           .text((d, i) => d )
-	           .attr("class", "textselected")
 	           .style("text-anchor", "start")
 	           .style("font-size", "0.5rem");
 	}

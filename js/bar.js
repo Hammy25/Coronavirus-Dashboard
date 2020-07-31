@@ -3,8 +3,11 @@
 */
 class BarChart{
 
-	constructor(_parentElement){
+	constructor(_parentElement, _width, _height){
 		this.parentElement = _parentElement;
+		this.svgWidth = _width;
+		this.svgHeight = _height;
+
 		this.initializeChart();
 	}
 
@@ -13,8 +16,8 @@ class BarChart{
 
 		// Defining dimensions
 		vis.margin = {top: 50, right: 50, bottom: 50, left: 50};
-		vis.width = 600;
-		vis.height = 200;
+		vis.width = vis.svgWidth - vis.margin.left - vis.margin.right;
+		vis.height = vis.svgHeight - vis.margin.top - vis.margin.bottom;
 
 		// Transitions
     	vis.t = () => { return d3.transition().duration(1000); }
@@ -23,7 +26,7 @@ class BarChart{
 		vis.svg = d3.select(vis.parentElement)
 					.append("svg")
 					.attr("preserveAspectRatio", "xMinYMin meet")
-					.attr("viewBox", "0 0 700 300")
+					.attr("viewBox", "0 0 " + vis.svgWidth + " " + vis.svgHeight)
 					.classed(".svg-content", true);
 
 		// Defining graph area
@@ -39,20 +42,26 @@ class BarChart{
 		vis.yScale = d3.scaleLinear().range([vis.height, 0]);
 
 		// Defining axes
-		vis.xAxis = vis.g.append("g")
-		               .attr("transform", "translate(0, " + vis.height + ")");
+		vis.xAxis = vis.g.append("g").attr("transform", "translate(0, " + vis.height + ")");
 		vis.yAxis = vis.g.append("g");
 
 		vis.wrangleData();
 	}
 
-	wrangleData(){
+	wrangleData(values){
 		var vis = this;
 
 		vis.key = $("#var-select").val();
 		vis.code = $("#country-select").val();
 
-		vis.data = formatData(allCases[vis.code].data)
+		if(values != undefined){
+  			vis.data = formatData(allCases[vis.code].data.filter(function(d){
+      		return ((d.date > values[0]) && (d.date < values[1]))
+  		}));
+		}else{
+  			vis.data = formatData(allCases[vis.code].data);
+		}
+
 
 		vis.titleText = determineTitle(vis.key);
 		// Get data to  work on 
@@ -70,11 +79,12 @@ class BarChart{
 		vis.yScale.domain([0, d3.max(vis.y_data) + 10]);
 
 		// Setting up axes
-		vis.xAxis.call(d3.axisBottom(vis.xScale).ticks(10).tickFormat(d3.timeFormat("%d %b")));
-		vis.yAxis.call(d3.axisLeft(vis.yScale));
-		// Setting fonts of axes' labels
-		vis.g.selectAll("text").style("font-family", "'Coming Soon', cursive").style("font-size", "0.35rem");
+		vis.xAxis.transition(vis.t()).call(d3.axisBottom(vis.xScale).ticks(10).tickFormat(d3.timeFormat("%d %b")));
+		vis.yAxis.transition(vis.t()).call(d3.axisLeft(vis.yScale));
 
+		// Setting fonts of axes' labels
+		vis.xAxis.selectAll("text").attr("class", "text-muted").style("font-family", "cursive, sans-serif").style("font-size", "0.35rem");
+		vis.yAxis.selectAll("text").attr("class", "text-muted").style("font-family", "cursive, sans-serif").style("font-size", "0.35rem");
 		// Heading code
 		vis.svg.select(".barTitle").remove();
 
@@ -83,8 +93,6 @@ class BarChart{
 						 .append("text")
 						 .attr("class", "barTitle")
 						 .attr("text-anchor","center")
-	       				 .attr("font-size", 14)
-	       				 .style("text-decoration", "underline")
 	       				 .text(vis.titleText)
 
 	    // y-axis label code
@@ -95,7 +103,7 @@ class BarChart{
                          	.attr("transform", "rotate(-90)")
                          	.attr("x", 0 -((vis.height+vis.margin.top+vis.margin.bottom)/2))
                          	.attr("y", (vis.margin.left/4))
-                         	.attr("font-size", "0.35rem")
+                         	.attr("font-size", "0.5rem")
                          	.attr("text-anchor", "middle")
                          	.text(vis.titleText);
 
@@ -130,9 +138,9 @@ class BarChart{
       			toolTip.style("visibility", "visible");
 	      		toolTip.html( () => {
 	            return (
-	              "Date :" + d.date +
+	              "<span class=\"tooltip-label\">Date: </span>" + formatTime(d.date) +
 	              "<br>" +
-	              vis.titleText + " :" + d[vis.key] +
+	              "<span class=\"tooltip-label\">" + vis.titleText + ": </span>" + numbersWithCommas(d[vis.key]) +
 	              "<br>");
 	        	});
 	        	toolTip.style("left", d3.event.pageX - 150+ "px");

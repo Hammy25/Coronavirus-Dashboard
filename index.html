@@ -4,19 +4,31 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 		<link rel="icon" href="img/hm_favicon.ico" type="image/ico" sizes="16x16">
-		<link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/style.css">
 		<script src="https://kit.fontawesome.com/4cf7efc90c.js" crossorigin="anonymous"></script>
-		<title>Coronavirus Stats</title>
+		<title>Coronavirus Statistics</title>
 	</head>
 	<body>
+		<div id="pre-loader"></div>
 		<nav class="navbar navbar-light bg-light">
-			<a class="navbar-brand" href="#">
+			<a id="nav-link" class="navbar-brand" href="https://www.hmwawuda.com/">
 				<img src="img/hm_logo.png" width="30" height="30" class="d-inline-block align-top" alt="Hammerton Mwawuda Logo">
-				Coronavirus Stats
+				Coronavirus Statistics
 			</a>
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link" href="#more-info">More Information</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#explore">Explore</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#kenya">Kenya</a>
+				</li>
+			</ul>
 		</nav>
 		<div class="container-fluid">
 			<div class="row">
@@ -51,48 +63,159 @@
 			<div class="row">
 				<div class="col-12" id="more-info">
 					<h2 id="more-info-heading">More Information</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<div id="general-info">
+						<h3 id="general-heading"></h3>
+						<i class="fas fa-globe"> </i><p> Continent: <span id="continent" class="font-weight-bold"></span></p>
+						<i class="material-icons">person</i><p> Population: <span id="population" class="font-weight-bold"></span></p>
+						<i class="material-icons">person_add</i><p> Population Density: <span id="pop-den" class="font-weight-bold"></span></p>
+						<i class="far fa-life-ring"></i><p> Life Expectancy: <span id="life" class="font-weight-bold"></span></p>
+						<i class="material-icons">unfold_less</i><p> Median Age: <span id="median-age" class="font-weight-bold"></span></p>
+						<i class="fas fa-walking"></i><p> 65 Older: <span id="older" class="font-weight-bold"></span></p>
+						<i class="material-icons">directions_walk</i><p> 70 Older: <span id="oldest" class="font-weight-bold"></span></p>
+						<i class="fas fa-money-bill-wave-alt"></i><p> GDP per Capita: <span id="gdp" class="font-weight-bold"></span></p>
+						<i class="fas fa-hands-wash"></i><p> Handwashing Facilities Access: <span id="handwash" class="font-weight-bold"></span></p>
+						<i class="fas fa-bed"></i><p> Hospital Beds per Thousand: <span id="beds" class="font-weight-bold"></span></p>
+						<i class="far fa-money-bill-alt"></i><p> Extreme Poverty: <span id="poverty" class="font-weight-bold"></span></p>
+						<i class="material-icons">people</i><p> Diabetes prevalence: <span id="diabetes" class="font-weight-bold"></span></p>
+						<i class="fas fa-calendar-plus"></i><p> Cardiovascular Disease Death Rate: <span id="cvd" class="font-weight-bold"></span></p>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12" id="smokers-parent">
+					<div id="smokers">
+					</div>
+					<div id="about-page">
+						<h3 id="about-heading">About</h3>
+						<p>The information presented on this page comes from data obtained by <a target="_blank" href="https://ourworldindata.org/">ourworldindata.org</a> and other sources.</p>
+						<p><a target="_blank" href="https://ourworldindata.org/">Ourworldindata.org</a> collects data to aid in solving worldwide problems. Their goal is to make knowledge about universal issues accessible and comprehensible.</p>
+						<p>Toggle the selectors on the top of the page to view information on Covid-19 per nation or the world as a whole.</p>
+						<p>Sources of data: <a target="_blank" href="https://github.com/owid">Ourworldindata (owid) Coronavirus GitHub repo</a> and <a target="_blank" href="https://github.com/pomber/covid19"> pomber/covid19 GitHub repo</a>.</p>
+						<p>I personally scrapped and collected Kenyan counties' data.</p>
+						<p>More information on the data: <a target="_blank" href="https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-data-codebook.md">more info here</a> and <a target="_blank" href="https://github.com/pomber/covid19">more info here</a>.</p>
+						<p>Code used to develop this dashboard is open source: <a target="_blank" href="https://github.com/Hammy25/Coronavirus-Dashboard">View code</a>.</p>
+						<p>This work is licensed under the <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row" id="explore">
+			<div class="col-12">
+				<div id="kenya-heading">
+					<h2>Explore</h2>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12" id="time-series-parent">
+				<div id="time-series">
 					<div class="row">
-						<div class="col-md-6 col-sm-12">
-							<div id="general-info">
-								<h3 id="general-heading"></h3>
-								<i class="fas fa-globe"> </i><p> Continent: <span id="continent"></span></p>
-								<i class="material-icons">person</i><p> Population: <span id="population"></span></p>
-								<i class="material-icons">person_add</i><p> Population Density: <span id="pop-den"></span></p>
-								<i class="far fa-life-ring"></i><p> Life Expectancy: <span id="life"></span></p>
-								<i class="material-icons">unfold_less</i><p> Median Age: <span id="median-age"></span></p>
-								<i class="fas fa-walking"></i><p> 65 Older: <span id="65-older"></span>%</p>
-								<i class="material-icons">directions_walk</i><p> 70 Older: <span id="70-older"></span>%</p>
-								<i class="fas fa-money-bill-wave-alt"></i><p> GDP per Capita: <span id="gdp"></span></p>
-								<i class="fas fa-hands-wash"></i><p> Handwashing Facilities Access: <span id="handwash"></span>%</p>
-								<i class="fas fa-bed"></i><p> Hospital Beds per Thousand: <span id="beds"></span></p>
-								<i class="far fa-money-bill-alt"></i><p> Extreme Poverty: <span id="poverty"></span>%</p>
-								<i class="material-icons">people</i><p> Diabetes prevalence: <span id="diabetes"></span></p>
-								<i class="fas fa-calendar-plus"></i><p> Cardiovascular Disease Death Rate: <span id="cvd"></span></p>
-							</div>
+						<div class="col-6">
+							<input class="form-control" type="date" name="time-series-date" id="time-series-date-select">
 						</div>
-						<div class="col-md-6 col-sm-12" id="smokers-parent">
-							<div id="smokers">
-							</div>
-							<div id="about-page">
-								<h3 id="about-heading">About</h3>
-								<p>The information presented on this page comes from data obtained by <a target="_blank" href="https://ourworldindata.org/">ourworldindata.org</a>.</p>
-								<p><a target="_blank" href="https://ourworldindata.org/">Ourworldindata.org</a> collects data to aid in solving worldwide problems. Their goal is to make knowledge about universal issues accessible and comprehensible.</p>
-								<p>Toggle the selectors on the top of the page to view information on Covid-19 per nation or the world as a whole.</p>
-								<p>Source of data: <a target="_blank" href="https://github.com/owid">Ourworldindata (owid) Coronavirus GitHub repo</a>.</p>
-								<p>More information on the data: <a target="_blank" href="https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-data-codebook.md">More info</a>.</p>
-								<p>Code used to develop this dashboard is open source: <a target="_blank" href="https://github.com/Hammy25/Coronavirus-Dashboard">View code</a>.</p>
-							</div>
+						<div class="col-6">
+							<select class="form-control" name="time-series-continent" id="time-series-continent-select">
+								<option value="world" selected="selected">World</option>
+							</select>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script src="js/jquery-3.5.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/d3.min.js"></script>
-		<script src="js/bar.js"></script>
-		<script src="js/pie.js"></script>
-		<script src="js/main.js"></script>
-	</body>
+	</div>
+	<div class="container-fluid">
+		<div class="row" id="kenya">
+			<div class="col-12">
+				<div id="kenya-heading">
+					<h2>Kenya</h2>
+					<small></small>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3 col-12">
+				<div id="kenya-confirmed">
+					<h4>Confirmed</h4>
+					<div class="kenya-change">
+						<small></small>
+					</div>
+					<div class="kenya-value lead">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-12">
+				<div id="kenya-active">
+					<h4>Active</h4>
+					<div class="kenya-change">
+						<small></small>
+					</div>
+					<div class="kenya-value lead">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-12">
+				<div id="kenya-recovered">
+					<h4>Recovered</h4>
+					<div class="kenya-change">
+						<small></small>
+					</div>
+					<div class="kenya-value lead">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-12">
+				<div id="kenya-deceased">
+					<h4>Deceased</h4>
+					<div class="kenya-change">
+						<small></small>
+					</div>
+					<div class="kenya-value lead">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-12" id="kenya-map-container">
+				<div id="kenya-map">
+					<h3>Confirmed Cases per County</h3>
+					<small id="kenya-last"></small>
+					<div id="active-county" class="text-left">
+						<h4 id="county-name"></h4>
+						<span id="county-cases"></span>
+						<small id="county-confirmed">confirmed</small>
+					</div>
+					<!-- input type="date" name="kenya-date" id="kenya-date" class="form-control"> -->
+				</div>
+			</div>
+			<div class="col-md-4 col-12" id="kenya-details-container">
+				<div id="kenya-details">
+					<h3></h3>
+					<div id="kenya-details-table">
+						<div class="county-row">
+							<div class="county-name text-muted">COUNTY NAME</div>
+							<div class="county-today text-muted">CASES TODAY</div>
+							<div class="county-total text-muted">CASES TOTAL</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery-3.5.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/d3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+	<script src="js/bar.js"></script>
+	<script src="js/timeline.js"></script>
+	<script src="js/timeseries.js"></script>
+	<script src="js/pie.js"></script>
+	<script src="js/kenya.js"></script>
+	<script src="js/global.js"></script>
+	<script src="js/main.js"></script>
+</body>
 </html>

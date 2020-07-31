@@ -2,11 +2,9 @@
 
 ## Introduction
 
-Last week I set out to create a visual dashboard of Coronavirus statistics. I wanted to create a simple dashboard where a user can view statistics about every country in relation to the current on going coronavirus pandemic. This repository contains code used to generate the dashboard.
+Using D3.js I was able to create a dashboard to visual data in relation the the covid-19 pandemic.
 
-Having recently learned d3.js, I put my newly acquired skills to the test.
-
-The dashboard consists of four (4) displays:
+The dashboard consists of the follwing displays/sections:
 
 1. Bar graph – Displays various statistics against time. These various statisticcs are: new cases(cases per day), new deaths(deaths per day), new tests(tests per day), total cases(cumulative cases), total tests(cumulative tests) and total deaths(cumulative deaths).
 
@@ -14,15 +12,30 @@ The dashboard consists of four (4) displays:
 
 3. Donut graph – Displays the smokers’ distribution according to gender in the selected country.
 
-4. About – Contains short paragraphs explaining the sources of data and how to use the dashboard.
+4. Scatter Plot - A scatter plot of total deaths against total cases in different countries. You can view how different countries have been affected by the covid-19 pandemic. You can also use the selectors to toggle the continents and dates you wish to view.
 
-## Screenshots
+5. Kenya section - A section to show you the spread of the virus within Kenya.
 
-![Bar Chart](./img/screenshot-1.png "Bar Chart.")
+6. About – Contains short paragraphs explaining the sources of data and how to use the dashboard.
 
-![More Information](./img/screenshot-2.png "General Information, Smokers’ Distribution and About displays.")
+## Screenshot
+
+![Dashboard](./img/coronavirus_dashboard.png "Dashboard.")
+
 
 ## Website
 
 View at: [coronavirus.hmwawuda.com](https://coronavirus.hmwawuda.com)
 
+## License
+
+Shield: [![CC BY 4.0][cc-by-shield]][cc-by]
+
+This work is licensed under a
+[Creative Commons Attribution 4.0 International License][cc-by].
+
+[![CC BY 4.0][cc-by-image]][cc-by]
+
+[cc-by]: http://creativecommons.org/licenses/by/4.0/
+[cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png
+[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
