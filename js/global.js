@@ -39,7 +39,7 @@ var toolTip = d3.select("body").append("div").attr("id", "tooltip")
 
 // Time parser
 var timeParser = d3.timeParse("%Y-%m-%d");
-var timeParser2 = d3.timeParse("%Y-%m-%d");
+var timeParser2 = d3.timeParse("%d/%m/%Y");
 
 // Time format
 var formatTime = d3.timeFormat("%A %d %B, %Y");
@@ -54,6 +54,11 @@ const numbersWithCommas = (x) => {
 // Format time to be displayed on dashboards
 const formatForDisplay = (time) => {
 	let t = timeParser2(time);
+	return(formatTime(t));
+};
+
+const formatForDisplay_2 = (time) => {
+	let t = timeParser(time);
 	return(formatTime(t));
 };
 
@@ -181,18 +186,18 @@ const formatData = (data) => {
 		        return(theNumber.toString());
 		    }
 		}
-		var workingData =data["Kenya"];
+		var workingData = data["Kenya"];
 		var last = workingData[workingData.length-1];
 		var secondLast = workingData[workingData.length-2];
 		var todayConfirmed = last.confirmed;
 		var todayDeaths = last.deaths;
 		var todayRecovered = last.recovered;
-		var todayActive = last.confirmed - last.recovered;
+		var todayActive = last.confirmed - last.recovered - last.deaths;
 		var todayConfirmedChange = last.confirmed - secondLast.confirmed;
 		var todayDeathsChange = last.deaths - secondLast.deaths;
 		var todayRecoveredChange = last.recovered - secondLast.recovered;
-		var todayActiveChange = todayActive - (secondLast.confirmed - secondLast.recovered);
-		$("#kenya-heading small").text("Last update: " + formatForDisplay(last.date));
+		var todayActiveChange = todayActive - (secondLast.confirmed - secondLast.recovered - secondLast.deaths);
+		$("#kenya-heading small").text("Last update: " + formatForDisplay_2(last.date));
 		$("#kenya-confirmed small").text(numbersWithCommas(addSign(todayConfirmedChange)));
 		$("#kenya-active small").text(numbersWithCommas(addSign(todayActiveChange)));
 		$("#kenya-recovered small").text(numbersWithCommas(addSign(todayRecoveredChange)));

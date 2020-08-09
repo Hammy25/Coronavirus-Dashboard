@@ -5,10 +5,11 @@
 
 $("document").ready( () => { 
 
-	// Display the preloader for 2 seconds to allow documents to be downloaded
+	// Display the preloader for 3 seconds to allow documents to be downloaded
 	$(window).on("load", () => {
 		setTimeout( () => {
-			$("#pre-loader").fadeOut("slow", function() {$(this).remove();})},2000);
+			$("#pre-loader").fadeOut("slow", () => $(this).remove());
+		}, 3000);
 	});
 	// Loading data
 	var promises = [d3.json("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.json"), d3.json("data/counties.json"), d3.csv("data/kenya_daily_covid.csv"), d3.json("https://pomber.github.io/covid19/timeseries.json")];

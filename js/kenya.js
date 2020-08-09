@@ -189,7 +189,7 @@ class KenyaMap{
       	vis.legend = vis.svg.append("g").attr("transform", "translate(" + (vis.width-200) + ", " + (vis.height-200) + ")");
 
 		vis.svg.selectAll("legend")
-		.data(vis.radiusScale.ticks(4).slice(1))
+		.data(vis.radiusScale.ticks(4))
 		.enter()
 		.append("circle")
 		.attr("cx", vis.width-200)
@@ -199,7 +199,7 @@ class KenyaMap{
 		.attr("stroke", "rgba(255, 0, 0, 0.5)")
 
 		vis.svg.selectAll("legend")
-		.data(vis.radiusScale.ticks(4).slice(1))
+		.data(vis.radiusScale.ticks(4))
 		.enter()
 		.append("line")
 	    .attr("x1", (d) =>{ return vis.width-200 + vis.radiusScale(d) } )
@@ -210,7 +210,7 @@ class KenyaMap{
 	    .attr("stroke-dasharray", ("2,2"))
 
 		vis.svg.selectAll("legend")
-		.data(vis.radiusScale.ticks(4).slice(1))
+		.data(vis.radiusScale.ticks(4))
 		.enter()
 		.append("text")
 	 	.style("color", "grey")
