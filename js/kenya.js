@@ -21,7 +21,7 @@ class KenyaMap{
 
 		// Defining color scale to be used (NB: using reds.)
 		// vis.colorScale = d3.scaleSequential().interpolator(d3.interpolateReds);
-		vis.radiusScale = d3.scaleLinear().range([1, 50]);
+		vis.radiusScale = d3.scaleLinear().range([4, 50]);
 
 		// Defining the projection of the map
 		// Coordinates of the center of the map (logitude, latitude)
@@ -89,7 +89,7 @@ class KenyaMap{
 		// Define a domain for the color scale
 		vis.radiusVals = vis.totalValCases.map(one => one.cases);
 		// vis.colorScale.domain(d3.extent(vis.values));
-		vis.radiusScale.domain(d3.extent(vis.radiusVals));
+		vis.radiusScale.domain([d3.min(vis.radiusVals), d3.max(vis.radiusVals)]);
 
 		// Data join
 		vis.dataJoin = vis.svg.selectAll("path").data(topojson.feature(kenyaMapData, kenyaMapData.objects.counties).features);

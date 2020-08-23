@@ -1,6 +1,10 @@
 html,body{
 	 font-family: cursive, sans-serif;
 }
+html {
+  scroll-padding-top: 58px; /* height of sticky header */
+  scroll-behavior: smooth;
+}
 
 /****
 	Styling Preloader

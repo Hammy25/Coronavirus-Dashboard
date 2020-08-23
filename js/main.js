@@ -10,9 +10,11 @@ $("document").ready( () => {
 		setTimeout( () => {
 			$("#pre-loader").fadeOut("slow", () => $(this).remove());
 		}, 3000);
+		$("#navigation-bar").addClass("sticky-top");
 	});
+
 	// Loading data
-	var promises = [d3.json("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.json"), d3.json("data/counties.json"), d3.csv("data/kenya_daily_covid.csv"), d3.json("https://pomber.github.io/covid19/timeseries.json")];
+	var promises = [d3.json("https://covid.ourworldindata.org/data/owid-covid-data.json"), d3.json("data/counties.json"), d3.csv("data/kenya_daily_covid.csv"), d3.json("https://pomber.github.io/covid19/timeseries.json")];
 
 	Promise.all(promises).then(data => {
 		// Drawing visualizations
