@@ -17,8 +17,13 @@ $("#country-select").on("change", () => {
 	timeline.wrangleData();
 });
 
-$("#time-series-continent-select").on("change", () => {
-	timeseries.wrangleData();
+$("#time-series-country-select").on("change", () => {
+	if($("#time-series-country-select").val() === "all"){
+		timeseries.wrangleData()
+	}else{
+		timeseries.wrangleData();
+		timeseries.filterCountry($("#time-series-country-select").val());
+	}	
 });
 
 $("#time-series-date-select").on("change", () => {
@@ -324,11 +329,15 @@ const formatData = (data) => {
 
 		var dates = [];
 		var continents = [];
+		var countries = [];
 		
 		wrkData.forEach(country => {
 			if(continents.indexOf(country.continent) < 0){
 				continents.push(country.continent);
 			}
+			// if(countries.indexOf(country.country) < 0){
+			// 	countries.push(country.country);
+			// }
 			country.cases.map(one => {
 				if(dates.indexOf(one.date) < 0){
 					dates.push(one.date);
@@ -341,8 +350,23 @@ const formatData = (data) => {
 		datesObjects.sort( (a,b) => a-b);
 		dates = datesObjects.map(date => formatTime_2(date));
 
-		continents.map(contintent => {$("#time-series-continent-select").append($("<option>").attr("value", contintent).text(contintent));});
+		continents.map(continent => {$("#time-series-continent-select").append($("<option>").attr("value", continent).text(continent));});
+		wrkData.map(country => $("#time-series-country-select").append($("<option>").attr("value", country.country).text(country.country)));
 		$("#time-series-date-select").attr("min", dates[0]).attr("max", dates[dates.length-1]).attr("value", dates[dates.length-1]);
 
 		timeseries = new TimeSeries("#time-series", 600, 300);
+
+		$("#time-series-continent-select").on("change", () => {
+			timeseries.wrangleData();
+			$("#time-series-country-select").empty();
+			$("#time-series-country-select").append($("<option>").attr("value", "all").text("All"));
+			if($("#time-series-continent-select").val() === "world"){
+				wrkData.map(country => $("#time-series-country-select").append($("<option>").attr("value", country.country).text(country.country)));
+			}
+			wrkData.map(country => {
+				if(country.continent === $("#time-series-continent-select").val()){
+					$("#time-series-country-select").append($("<option>").attr("value", country.country).text(country.country));
+				}
+			});
+		});
 	};

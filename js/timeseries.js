@@ -132,10 +132,6 @@ class TimeSeries{
 			});
 		});
 
-		// Getting rid of duplicates
-		// vis.deaths = Array.from(new Set(vis.deaths));
-		// vis.totalCases = Array.from(new Set(vis.totalCases));
-
 		vis.updateChart();
 	}
 
@@ -281,5 +277,105 @@ class TimeSeries{
 			    		 .style("font-size", "0.35rem")
 			    		 .text(continent);
 		});
+	}
+
+	filterCountry(country){
+		var vis = this;
+
+		// Get selected country
+		vis.data = vis.data.filter( item =>  item.country == country);
+
+		// Data join
+		vis.circles = vis.g.selectAll("circle").data(vis.data);
+
+		// D3 update pattern
+		vis.circles.exit().remove();
+
+		vis.circles.enter().append("circle")
+		   .attr("fill-opacity", 0.7)
+		   .attr("data-country", d => d.country)
+		   .attr("data-deaths", d =>{
+			   	let totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
+			   		if(totalDeaths.length > 0){
+			   			return(totalDeaths[0].total_deaths);
+			   		}else{
+			   			return 0;
+			   		}  	
+		   	}).attr("data-cases", d => {
+		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
+		   		if(totalCase.length > 0){
+		   			return(totalCase[0].total_cases);
+		   		}else{
+		   			return 0;
+		   		}	
+		   	})
+		   	.attr("stroke", "grey")
+		   	.on("mouseover", d => {
+		   		// Mouseover effects
+		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate)
+		   	    var circle = d3.select(event.currentTarget);
+		   		circle.attr("fill-opacity", 1);
+		   		circle.attr("stroke", "black");
+		   		circle.attr("stroke-width", 1);
+      			toolTip.style("visibility", "visible");
+      			toolTip.style("text-align", "left")
+	      		toolTip.html( () => {
+	            return(
+	            	"<span class=\"tooltip-label\">Continent: </span>" + d.continent +
+	            	"<br>" +
+	            	"<span class=\"tooltip-label\">Country Code: </span>" + d.country_code +
+	            	"<br>" +
+	            	"<span class=\"tooltip-label\">Country: </span>" + d.country +
+	            	"<br>" +
+	            	"<span class=\"tooltip-label\">Date: </span>" + totalCase[0].date +
+	            	"<br>" +
+	            	"<span class=\"tooltip-label\">Population: </span>" + numbersWithCommas(d.population) +
+	            	"<br>" +
+	            	"<span class=\"tooltip-label\">Total Cases: </span>" + numbersWithCommas(totalCase[0].total_cases) +
+	            	"<br>" + 
+	            	"<span class=\"tooltip-label\">Total Deaths: </span>" + numbersWithCommas(totalCase[0].total_deaths) +
+	            	"<br>")
+	        	});
+	        	toolTip.style("left", d3.event.pageX + "px");
+        		toolTip.style("top", d3.event.pageY + "px");
+	      	})
+        	.on("mouseout", function (d) {
+        		// Mouseout effects
+        		var circle = d3.select(event.currentTarget);
+      			toolTip.style("visibility", "hidden");
+      			circle.attr("fill-opacity", 0.7);
+		   		circle.attr("stroke", "grey");
+    		})
+    		.merge(vis.circles)
+    		.transition(vis.t())
+    		.attr("cx", d => {
+		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
+		   		if(totalCase.length > 0){
+		   			return(vis.xScale(totalCase[0].total_cases));
+		   		}else{
+		   			return null;
+		   		}	
+		   })
+		   .attr("cy", d => {
+		   		let totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
+		   		if(totalDeaths.length > 0){
+		   			return(vis.yScale(totalDeaths[0].total_deaths));
+		   		}else{
+		   			return null;
+		   		}  		
+		   })
+		   .attr("r", d => {
+		   	let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
+		   	let totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
+		   	if(totalDeaths[0] != undefined && totalCase[0] != undefined){
+		   		return(vis.radiusScale(d.population))	
+		   	}else{
+		   		return 0;
+		   	}
+		   	
+		   })
+		   .attr("fill", d => {
+		   	return(vis.continentColor(d.continent))
+		   });
 	}
 }

@@ -206,7 +206,7 @@ i{
 	text-align: center;
 }
 
-#time-series-continent-select, #time-series-date-select{
+#time-series-continent-select, #time-series-date-select, #time-series-country-select{
 	width: 90%;
 	margin: 10px auto 10px auto;
 }
