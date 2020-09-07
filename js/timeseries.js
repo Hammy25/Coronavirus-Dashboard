@@ -172,7 +172,8 @@ class TimeSeries{
 			   		}else{
 			   			return 0;
 			   		}  	
-		   	}).attr("data-cases", d => {
+		   	})
+		   .attr("data-cases", d => {
 		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
 		   		if(totalCase.length > 0){
 		   			return(totalCase[0].total_cases);
@@ -180,8 +181,8 @@ class TimeSeries{
 		   			return 0;
 		   		}	
 		   	})
-		   	.attr("stroke", "grey")
-		   	.on("mouseover", d => {
+		   .attr("stroke", "grey")
+		   .on("mouseover", d => {
 		   		// Mouseover effects
 		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate)
 		   	    var circle = d3.select(event.currentTarget);
@@ -210,16 +211,16 @@ class TimeSeries{
 	        	toolTip.style("left", d3.event.pageX + "px");
         		toolTip.style("top", d3.event.pageY + "px");
 	      	})
-        	.on("mouseout", function (d) {
+           .on("mouseout", function (d) {
         		// Mouseout effects
         		var circle = d3.select(event.currentTarget);
       			toolTip.style("visibility", "hidden");
       			circle.attr("fill-opacity", 0.7);
 		   		circle.attr("stroke", "grey");
     		})
-    		.merge(vis.circles)
-    		.transition(vis.t())
-    		.attr("cx", d => {
+    	   .merge(vis.circles)
+    	   .transition(vis.t())
+    	   .attr("cx", d => {
 		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
 		   		if(totalCase.length > 0){
 		   			return(vis.xScale(totalCase[0].total_cases));
@@ -243,7 +244,6 @@ class TimeSeries{
 		   	}else{
 		   		return 0;
 		   	}
-		   	
 		   })
 		   .attr("fill", d => {
 		   	return(vis.continentColor(d.continent))
@@ -301,7 +301,8 @@ class TimeSeries{
 			   		}else{
 			   			return 0;
 			   		}  	
-		   	}).attr("data-cases", d => {
+		   	})
+		   .attr("data-cases", d => {
 		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
 		   		if(totalCase.length > 0){
 		   			return(totalCase[0].total_cases);
@@ -309,8 +310,8 @@ class TimeSeries{
 		   			return 0;
 		   		}	
 		   	})
-		   	.attr("stroke", "grey")
-		   	.on("mouseover", d => {
+		   .attr("stroke", "grey")
+		   .on("mouseover", d => {
 		   		// Mouseover effects
 		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate)
 		   	    var circle = d3.select(event.currentTarget);
@@ -339,16 +340,16 @@ class TimeSeries{
 	        	toolTip.style("left", d3.event.pageX + "px");
         		toolTip.style("top", d3.event.pageY + "px");
 	      	})
-        	.on("mouseout", function (d) {
+           .on("mouseout", function (d) {
         		// Mouseout effects
         		var circle = d3.select(event.currentTarget);
       			toolTip.style("visibility", "hidden");
       			circle.attr("fill-opacity", 0.7);
 		   		circle.attr("stroke", "grey");
     		})
-    		.merge(vis.circles)
-    		.transition(vis.t())
-    		.attr("cx", d => {
+    	   .merge(vis.circles)
+    	   .transition(vis.t())
+    	   .attr("cx", d => {
 		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
 		   		if(totalCase.length > 0){
 		   			return(vis.xScale(totalCase[0].total_cases));
