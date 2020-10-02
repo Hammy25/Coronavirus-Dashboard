@@ -1,3 +1,6 @@
+/*
+	TimeSeries (Total deaths against total cases) Class.
+*/
 class TimeSeries{
 
 	constructor(_parentElement, _width, _height){
@@ -9,17 +12,17 @@ class TimeSeries{
 	}
 
 	initializeChart(){
-		var vis = this;
+		const vis = this;
 
 		vis.margin = {top: 0, right: 50, bottom: 50, left: 30};
 		vis.width = vis.svgWidth - vis.margin.right - vis.margin.left;
 		vis.height = vis.svgHeight - vis.margin.top - vis.margin.bottom;
 
 		vis.svg = d3.select("#time-series")
-		.append("svg")
-		.attr("preserveAspectRatio", "xMinYMin meet")
-		.attr("viewBox", "0 0 "+ vis.svgWidth + " " + vis.svgHeight)
-		.classed(".svg-content", true);
+					.append("svg")
+					.attr("preserveAspectRatio", "xMinYMin meet")
+					.attr("viewBox", "0 0 "+ vis.svgWidth + " " + vis.svgHeight)
+					.classed(".svg-content", true);
 
 		// Transitions
     	vis.t = () => { return d3.transition().duration(1000); }
@@ -34,28 +37,28 @@ class TimeSeries{
 
 		// Defining graph area
 		vis.g =  vis.svg.append("g")
-		.attr("class", "time-series-chart")
-		.attr("width",  vis.width).attr("height",  vis.height)
-		.attr("transform", "translate(" +  vis.margin.left + "," +  vis.margin.top + ")");
+					.attr("class", "time-series-chart")
+					.attr("width",  vis.width).attr("height",  vis.height)
+					.attr("transform", "translate(" +  vis.margin.left + "," +  vis.margin.top + ")");
 
 		// Appending X axis label
 		vis.xAxisText = vis.g.append("text")
-						 .attr("class", "x axis-label")
-						 .attr("x", (vis.svgWidth - vis.margin.left - vis.margin.right) / 2)
-						 .attr("y", vis.svgHeight - (vis.margin.bottom/4))
-						 .attr("text-anchor", "middle")
-						 .style("font-size", "0.5rem")
-						 .text("Total Cases");
+						   .attr("class", "x axis-label")
+						   .attr("x", (vis.svgWidth - vis.margin.left - vis.margin.right) / 2)
+						   .attr("y", vis.svgHeight - (vis.margin.bottom/4))
+						   .attr("text-anchor", "middle")
+						   .style("font-size", "0.5rem")
+						   .text("Total Cases");
 
 		// Apppending Y axis label
 		vis.yAxisText = vis.g.append("text")
-						 .attr("transform", "rotate(-90)")
-				         .attr("y", 0 - vis.margin.left / 2)
-				         .attr("x",0 - ((vis.svgHeight-vis.margin.top-vis.margin.bottom) / 2))
-				         .attr("dy", "1em")
-				         .style("text-anchor", "middle")
-				         .style("font-size", "0.5rem")
-				         .text("Total Deaths");
+						   .attr("transform", "rotate(-90)")
+				           .attr("y", 0 - vis.margin.left / 2)
+				           .attr("x",0 - ((vis.svgHeight-vis.margin.top-vis.margin.bottom) / 2))
+				           .attr("dy", "1em")
+				           .style("text-anchor", "middle")
+				           .style("font-size", "0.5rem")
+				           .text("Total Deaths");
 
 		// Defining scales
 		vis.xScale = d3.scaleLinear().range([vis.margin.left,  vis.width]);
@@ -71,7 +74,7 @@ class TimeSeries{
 	}
 
 	wrangleData(){
-		var vis = this;
+		const vis = this;
 
 		// Arrays to create domains of the axes
 		vis.totalCases = [];
@@ -136,7 +139,7 @@ class TimeSeries{
 	}
 
 	updateChart(){
-		var vis = this;
+		const vis = this;
 
 		// Set up domains for our scales
 		vis.continentColor.domain(vis.continents);
@@ -167,25 +170,17 @@ class TimeSeries{
 		   .attr("data-country", d => d.country)
 		   .attr("data-deaths", d =>{
 			   	let totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
-			   		if(totalDeaths.length > 0){
-			   			return(totalDeaths[0].total_deaths);
-			   		}else{
-			   			return 0;
-			   		}  	
+			   	return((totalDeaths.length > 0) ? vis.yScale(totalDeaths[0].total_deaths) : 0);		
 		   	})
 		   .attr("data-cases", d => {
-		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
-		   		if(totalCase.length > 0){
-		   			return(totalCase[0].total_cases);
-		   		}else{
-		   			return 0;
-		   		}	
+		   		const totalCase = d.cases.filter(one => one.date == vis.chosenDate);
+		   		return((totalCase.length > 0) ? vis.yScale(totalCase[0].total_cases) : null);			
 		   	})
 		   .attr("stroke", "grey")
 		   .on("mouseover", d => {
 		   		// Mouseover effects
-		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate)
-		   	    var circle = d3.select(event.currentTarget);
+		   		const totalCase = d.cases.filter(one => one.date == vis.chosenDate)
+		   	    const circle = d3.select(event.currentTarget);
 		   		circle.attr("fill-opacity", 1);
 		   		circle.attr("stroke", "black");
 		   		circle.attr("stroke-width", 1);
@@ -221,32 +216,20 @@ class TimeSeries{
     	   .merge(vis.circles)
     	   .transition(vis.t())
     	   .attr("cx", d => {
-		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
-		   		if(totalCase.length > 0){
-		   			return(vis.xScale(totalCase[0].total_cases));
-		   		}else{
-		   			return null;
-		   		}	
+		   		const totalCase = d.cases.filter(one => one.date == vis.chosenDate);
+		   		return((totalCase.length > 0) ? vis.xScale(totalCase[0].total_cases) : null)
 		   })
 		   .attr("cy", d => {
-		   		let totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
-		   		if(totalDeaths.length > 0){
-		   			return(vis.yScale(totalDeaths[0].total_deaths));
-		   		}else{
-		   			return null;
-		   		}  		
+		   		const totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
+		   		return((totalDeaths.length > 0) ? vis.yScale(totalDeaths[0].total_deaths) : null);		
 		   })
 		   .attr("r", d => {
-		   	let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
-		   	let totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
-		   	if(totalDeaths[0] != undefined && totalCase[0] != undefined){
-		   		return(vis.radiusScale(d.population))	
-		   	}else{
-		   		return 0;
-		   	}
+			   	const totalCase = d.cases.filter(one => one.date == vis.chosenDate);
+			   	const totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
+			   	return((totalDeaths[0] != undefined && totalCase[0] != undefined) ? vis.radiusScale(d.population) : 0);
 		   })
 		   .attr("fill", d => {
-		   	return(vis.continentColor(d.continent))
+		   		return(vis.continentColor(d.continent))
 		   });
 
 		
@@ -257,8 +240,7 @@ class TimeSeries{
 		vis.legend = vis.g.append("g").attr("id", "timeseries-legend").attr("transform", "translate("+ (vis.svgWidth - vis.margin.right + 5) + "," + (vis.svgHeight - vis.margin.bottom - 125) + ")" )
 
 		vis.continents.forEach((continent, i) => {
-				var legendRow = vis.legend.append("g")
-								  .attr("transform", "translate(0, " + (i*20) + ")")
+				const legendRow = vis.legend.append("g").attr("transform", "translate(0, " + (i*20) + ")");
 
 				legendRow.append("rect")
 						 .attr("width", 10)
@@ -280,7 +262,7 @@ class TimeSeries{
 	}
 
 	filterCountry(country){
-		var vis = this;
+		const vis = this;
 
 		// Get selected country
 		vis.data = vis.data.filter( item =>  item.country == country);
@@ -295,31 +277,23 @@ class TimeSeries{
 		   .attr("fill-opacity", 0.7)
 		   .attr("data-country", d => d.country)
 		   .attr("data-deaths", d =>{
-			   	let totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
-			   		if(totalDeaths.length > 0){
-			   			return(totalDeaths[0].total_deaths);
-			   		}else{
-			   			return 0;
-			   		}  	
+			   	const totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
+			   	return(totalDeaths.length > 0 ? totalDeaths[0].total_deaths : 0);
 		   	})
 		   .attr("data-cases", d => {
-		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
-		   		if(totalCase.length > 0){
-		   			return(totalCase[0].total_cases);
-		   		}else{
-		   			return 0;
-		   		}	
+		   		const totalCase = d.cases.filter(one => one.date == vis.chosenDate);
+		   		return(totalCase.length > 0 ? totalCase[0].total_cases : 0);
 		   	})
 		   .attr("stroke", "grey")
 		   .on("mouseover", d => {
 		   		// Mouseover effects
-		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate)
-		   	    var circle = d3.select(event.currentTarget);
+		   		const totalCase = d.cases.filter(one => one.date == vis.chosenDate)
+		   	    const circle = d3.select(event.currentTarget);
 		   		circle.attr("fill-opacity", 1);
 		   		circle.attr("stroke", "black");
 		   		circle.attr("stroke-width", 1);
       			toolTip.style("visibility", "visible");
-      			toolTip.style("text-align", "left")
+      			toolTip.style("text-align", "left");
 	      		toolTip.html( () => {
 	            return(
 	            	"<span class=\"tooltip-label\">Continent: </span>" + d.continent +
@@ -342,7 +316,7 @@ class TimeSeries{
 	      	})
            .on("mouseout", function (d) {
         		// Mouseout effects
-        		var circle = d3.select(event.currentTarget);
+        		const circle = d3.select(event.currentTarget);
       			toolTip.style("visibility", "hidden");
       			circle.attr("fill-opacity", 0.7);
 		   		circle.attr("stroke", "grey");
@@ -350,33 +324,20 @@ class TimeSeries{
     	   .merge(vis.circles)
     	   .transition(vis.t())
     	   .attr("cx", d => {
-		   		let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
-		   		if(totalCase.length > 0){
-		   			return(vis.xScale(totalCase[0].total_cases));
-		   		}else{
-		   			return null;
-		   		}	
+		   		const totalCase = d.cases.filter(one => one.date == vis.chosenDate);
+		   		return(totalCase.length > 0 ? vis.xScale(totalCase[0].total_cases) : null);
 		   })
 		   .attr("cy", d => {
-		   		let totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
-		   		if(totalDeaths.length > 0){
-		   			return(vis.yScale(totalDeaths[0].total_deaths));
-		   		}else{
-		   			return null;
-		   		}  		
+		   		const totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
+		   		return(totalDeaths.length > 0 ? vis.yScale(totalDeaths[0].total_deaths) : null);
 		   })
 		   .attr("r", d => {
-		   	let totalCase = d.cases.filter(one => one.date == vis.chosenDate);
-		   	let totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
-		   	if(totalDeaths[0] != undefined && totalCase[0] != undefined){
-		   		return(vis.radiusScale(d.population))	
-		   	}else{
-		   		return 0;
-		   	}
-		   	
+			   	const totalCase = d.cases.filter(one => one.date == vis.chosenDate);
+			   	const totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
+			   	return((totalDeaths[0] != undefined && totalCase[0] != undefined) ? vis.radiusScale(d.population) : 0);
 		   })
 		   .attr("fill", d => {
-		   	return(vis.continentColor(d.continent))
+		   		return(vis.continentColor(d.continent))
 		   });
 	}
 }

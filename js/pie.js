@@ -16,7 +16,7 @@ class DonutChart{
 
 	// Initialize chart
 	initializeChart(){
-		var vis = this;
+		const vis = this;
 
 		// Define constants
 		vis.margin = {top: 20, right: 0, bottom: 20, left: 40};
@@ -68,7 +68,7 @@ class DonutChart{
 
 	// Wrangle Data
 	wrangleData(values){
-		var vis = this;
+		const vis = this;
 
 		vis.key = $("#var-select").val();
 		vis.code = $("#country-select").val();
@@ -87,10 +87,10 @@ class DonutChart{
 
 	// Update chart
 	updateChart(){
-		var vis = this;
+		const vis = this;
 
 		const arcTween = (d) =>  {
-		var i = d3.interpolate(this._current, d);
+		const i = d3.interpolate(this._current, d);
 		this._current = i(0);
 		return function(t) { return vis.arc(i(t)); };
 		}

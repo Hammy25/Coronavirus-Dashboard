@@ -15,7 +15,7 @@ class Timeline{
 
 	// Initializing chart
 	intializeChart(){
-		var vis = this;
+		const vis = this;
 
 		// Dimensions
     	vis.margin = {top: 0, right: 50, bottom: 30, left: 50};
@@ -24,9 +24,9 @@ class Timeline{
 
     	// Creating svg canvas
     	vis.svg = d3.select(vis.parentElement).append("svg")
-                         .attr("preserveAspectRatio", "xMinYMin meet")
-                         .attr("viewBox", "0 0 " + vis.svgWidth + " " + vis.svgHeight)
-                         .classed(".svg-content", true);
+                    .attr("preserveAspectRatio", "xMinYMin meet")
+                    .attr("viewBox", "0 0 " + vis.svgWidth + " " + vis.svgHeight)
+                    .classed(".svg-content", true);
 
 		vis.t = () => { return d3.transition().duration(1000); };
 
@@ -34,32 +34,28 @@ class Timeline{
     			   .attr("fill-opacity", 0.7)
             	   .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-    	vis.x = d3.scaleTime()
-        		  .range([0, vis.width]);
+    	vis.x = d3.scaleTime().range([0, vis.width]);
 
-	    vis.y = d3.scaleLinear()
-	        .range([vis.height, 0]);
+	    vis.y = d3.scaleLinear().range([vis.height, 0]);
 
-	    vis.xAxisDates = d3.axisBottom()
-	        .ticks(3);
+	    vis.xAxisDates = d3.axisBottom().ticks(3);
 
 	    vis.xAxis = vis.g.append("g")
-	        .attr("class", "x axis")
-	        .attr("transform", "translate(0," + vis.height +")");
+	        		   .attr("class", "x axis")
+	                   .attr("transform", "translate(0," + vis.height +")");
 
-	    vis.areaPath = vis.g.append("path")
-	        .attr("fill", "#ccc");
+	    vis.areaPath = vis.g.append("path").attr("fill", "#ccc");
 
 	    // Initialize brush component
 	    vis.brush = d3.brushX()
-	        .handleSize(10)
-	        .extent([[0, 0], [vis.width, vis.height]])
-	        .on("brush end", brushed)
+	        		  .handleSize(10)
+	                  .extent([[0, 0], [vis.width, vis.height]])
+	                  .on("brush end", brushed)
 
 	    // Append brush component
 	    vis.brushComponent = vis.g.append("g")
-	        .attr("class", "brush")
-	        .call(vis.brush);
+	                            .attr("class", "brush")
+	                            .call(vis.brush);
 
 		vis.wrangleData();
 	}
@@ -94,9 +90,8 @@ class Timeline{
 
 	// Update chart
 	updateChart(){
-		var vis = this;
-
-		var dateArray = vis.dataFiltered.map(d => new Date(d.date));
+		const vis = this;
+		
 		vis.x.domain(d3.extent(vis.dataFiltered, d => new Date(d.date)));
     	vis.y.domain([0, d3.max(vis.dataFiltered, (d) => d.sum)]);
 
@@ -114,8 +109,6 @@ class Timeline{
         			 .y0(vis.height)
         			 .y1( d => vis.y(d.sum));
 
-    	vis.areaPath
-           .data([vis.dataFiltered])
-           .attr("d", vis.area);
+    	vis.areaPath.data([vis.dataFiltered]).attr("d", vis.area);
 	}
 }

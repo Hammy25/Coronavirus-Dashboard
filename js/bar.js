@@ -12,7 +12,7 @@ class BarChart{
 	}
 
 	initializeChart(){
-		var vis = this;
+		const vis = this;
 
 		// Defining dimensions
 		vis.margin = {top: 50, right: 50, bottom: 50, left: 50};
@@ -49,7 +49,7 @@ class BarChart{
 	}
 
 	wrangleData(values){
-		var vis = this;
+		const vis = this;
 
 		vis.key = $("#var-select").val();
 		vis.code = $("#country-select").val();
@@ -72,7 +72,7 @@ class BarChart{
 	}
 
 	updateChart(){
-		var vis = this;
+		const vis = this;
 
 		// Setting domain of scales
 		vis.xScale.domain(d3.extent(vis.x_data));
@@ -131,7 +131,7 @@ class BarChart{
 		   .attr("height", d => vis.height - vis.yScale(d[vis.key]))
 		   .on("mouseover", d => {
 		   		// Mouseover effects
-		   	    var bar = d3.select(event.currentTarget);
+		   	    const bar = d3.select(event.currentTarget);
 		   		bar.attr("fill-opacity", 1);
 		   		bar.attr("stroke", "black");
 		   		bar.attr("stroke-width", 0.5);
@@ -146,9 +146,9 @@ class BarChart{
 	        	toolTip.style("left", d3.event.pageX - 150+ "px");
         		toolTip.style("top", d3.event.pageY + "px");
 	      	})
-        	.on("mouseout", function (d) {
+        	.on("mouseout", d => {
         		// Mouseout effects
-        		var bar = d3.select(event.currentTarget);
+        		const bar = d3.select(event.currentTarget);
       			toolTip.style("visibility", "hidden");
       			bar.attr("fill-opacity", 0.8);
 		   		bar.attr("stroke", "none");

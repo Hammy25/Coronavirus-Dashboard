@@ -3,7 +3,7 @@
 */
 
 // Charts
-var barChar, smokersPieChart, kenya, timeline, timeseries;
+let barChar, smokersPieChart, kenya, timeline, timeseries;
 
 // Event handling
 $("#var-select").on("change", () => {
@@ -32,23 +32,23 @@ $("#time-series-date-select").on("change", () => {
 
 // Handle brushes
 const brushed = () => {
-      var selection = d3.event.selection || timeline.x.range();
-      var newValues = selection.map(timeline.x.invert)
+      const selection = d3.event.selection || timeline.x.range();
+      const newValues = selection.map(timeline.x.invert)
       barChart.wrangleData(newValues);
 };
 
 // Tooltip 
-var toolTip = d3.select("body").append("div").attr("id", "tooltip")
+const toolTip = d3.select("body").append("div").attr("id", "tooltip")
 				.style("background-color", "rgb(139, 166, 106)")
 				.style("visibility", "hidden");
 
 // Time parser
-var timeParser = d3.timeParse("%Y-%m-%d");
-var timeParser2 = d3.timeParse("%d/%m/%Y");
+const timeParser = d3.timeParse("%Y-%m-%d");
+const timeParser2 = d3.timeParse("%d/%m/%Y");
 
 // Time format
-var formatTime = d3.timeFormat("%A %d %B, %Y");
-var formatTime_2 = d3.timeFormat("%Y-%m-%d");
+const formatTime = d3.timeFormat("%A %d %B, %Y");
+const formatTime_2 = d3.timeFormat("%Y-%m-%d");
 
 
 //  Add commas to digits for display
@@ -135,7 +135,7 @@ const formatData = (data) => {
 
 	// Initialize first visualizations.
 	const worldIntialize = (data) => {
-		var countryCodes = Object.keys(data);
+		const countryCodes = Object.keys(data);
 		countryCodes.map( code => {
 			if(code === "KEN"){
 				$("#country-select").append($("<option>").attr("value", code).attr("selected", "selected").text(data[code].location));
@@ -154,7 +154,7 @@ const formatData = (data) => {
 		smokersPieChart = new DonutChart("#smokers", 340, 170);
 
 		$("#country-select").on("change", (allData) => {
-			var country_code = $("#country-select").val();
+			const country_code = $("#country-select").val();
 			editInformation(allCases[country_code]);
 			timeline.wrangleData();
 		});
@@ -162,11 +162,7 @@ const formatData = (data) => {
 
 	// Edit General info
 	const editInformation = (d) => {
-		if(d.location === "World"){
-			$("#continent").text(d.location);
-		}else{
-			$("#continent").text(d.continent);
-		}
+		d.location === "World" ? $("#continent").text(d.location) : $("#continent").text(d.continent);
 		$("#population").text(d.population === undefined ? "N/A" : numbersWithCommas(d.population));
 		$("#pop-den").text(d.population_density === undefined ? "N/A" : d.population_density);
 		$("#median-age").text( d.median_age === undefined ? "N/A" : d.median_age);
@@ -184,24 +180,18 @@ const formatData = (data) => {
 
 	// Kenya summary displays
 	const populateKenyaSummary = (data) => {
-		const addSign = (theNumber) => {
-		    if(theNumber > 0){
-		        return("+" + theNumber);
-		    }else{
-		        return(theNumber.toString());
-		    }
-		}
-		var workingData = data["Kenya"];
-		var last = workingData[workingData.length-1];
-		var secondLast = workingData[workingData.length-2];
-		var todayConfirmed = last.confirmed;
-		var todayDeaths = last.deaths;
-		var todayRecovered = last.recovered;
-		var todayActive = last.confirmed - last.recovered - last.deaths;
-		var todayConfirmedChange = last.confirmed - secondLast.confirmed;
-		var todayDeathsChange = last.deaths - secondLast.deaths;
-		var todayRecoveredChange = last.recovered - secondLast.recovered;
-		var todayActiveChange = todayActive - (secondLast.confirmed - secondLast.recovered - secondLast.deaths);
+		const addSign = (theNumber) => (theNumber > 0 ? ("+" + theNumber) : theNumber.toString());
+		const workingData = data["Kenya"];
+		const last = workingData[workingData.length-1];
+		const secondLast = workingData[workingData.length-2];
+		const todayConfirmed = last.confirmed;
+		const todayDeaths = last.deaths;
+		const todayRecovered = last.recovered;
+		const todayActive = last.confirmed - last.recovered - last.deaths;
+		const todayConfirmedChange = last.confirmed - secondLast.confirmed;
+		const todayDeathsChange = last.deaths - secondLast.deaths;
+		const todayRecoveredChange = last.recovered - secondLast.recovered;
+		const todayActiveChange = todayActive - (secondLast.confirmed - secondLast.recovered - secondLast.deaths);
 		$("#kenya-heading small").text("Last update: " + formatForDisplay_2(last.date));
 		$("#kenya-confirmed small").text(numbersWithCommas(addSign(todayConfirmedChange)));
 		$("#kenya-active small").text(numbersWithCommas(addSign(todayActiveChange)));
@@ -234,7 +224,7 @@ const formatData = (data) => {
 		kenya = new KenyaMap("#kenya-map", 900, 600);
 
 		$("#kenya-date").on("change", () => {
-			var chosenDate = $("#kenya-date").val();
+			const chosenDate = $("#kenya-date").val();
 			kenya.wrangleData();
 			$("#kenya-details-container h2").text(formatForDisplay(chosenDate));
 			$("#range-value").text($("#kenya-date").val());
@@ -245,10 +235,10 @@ const formatData = (data) => {
 
 	// Populates Kenya's details on a table
 	const populateDetails = (data) => {
-		var chosenDate = data.columns[data.columns.length-1];
+		const chosenDate = data.columns[data.columns.length-1];
 		$("#kenya-details-container h3").text(formatForDisplay(chosenDate));
-		var chosenDateValues = [];
-		var totalValues = [];
+		let chosenDateValues = [];
+		let totalValues = [];
 		chosenDateValues = data.map(county => {
 			let obj = {};
 			if(county.County != "Total"){
@@ -300,11 +290,11 @@ const formatData = (data) => {
 		counties.map(county => {
 			let countyName = county.toUpperCase();
 			$("#kenya-details-table").append("<div class=\"county-row\"></div>")
-			var last = $("#kenya-details-table .county-row").last();
+			let last = $("#kenya-details-table .county-row").last();
 			last.append("<div class=\"county-name text-muted\">" + countyName + "</div>");
-			var chosen_1 = chosenDateValues.filter(c => c.county == county);
+			const chosen_1 = chosenDateValues.filter(c => c.county == county);
 			last.append("<div class=\"county-today\">" + numbersWithCommas(chosen_1[0].cases) + "</div>");
-			var chosen_2 = totalValues.filter(c => c.county == county);
+			const chosen_2 = totalValues.filter(c => c.county == county);
 			last.append("<div class=\"county-total\">" + numbersWithCommas(chosen_2[0].cases) + "</div>");
 		})
 	};
@@ -312,7 +302,7 @@ const formatData = (data) => {
 	// Draw the death to cases scatter plot
 	const drawTimeSeries = (data) => {
 
-		var workingData = [];
+		let workingData = [];
 		Object.entries(data).map(data => {
 			if(data[0] != "OWID_WRL"){
 				obj = {};
@@ -327,9 +317,9 @@ const formatData = (data) => {
 
 		wrkData = workingData;
 
-		var dates = [];
-		var continents = [];
-		var countries = [];
+		let dates = [];
+		let continents = [];
+		let countries = [];
 		
 		wrkData.forEach(country => {
 			if(continents.indexOf(country.continent) < 0){

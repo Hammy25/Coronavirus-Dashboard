@@ -1,3 +1,6 @@
+/*
+	KenyaMap class
+*/
 class KenyaMap{
 
 	constructor(_parentElement, _width, _height){
@@ -9,7 +12,7 @@ class KenyaMap{
 	}
 
 	initializeChart(){
-		var vis = this;
+		const vis = this;
 
 		//  Defining svg
 		vis.svg = d3.select(vis.parentElement)
@@ -35,10 +38,10 @@ class KenyaMap{
 	}
 
 	wrangleData(){
-		var vis = this;
+		const vis = this;
 
 		// Get columns from the data read from the csv.
-		var columns = covid_data.columns;
+		const columns = covid_data.columns;
 
 		// Get values to be used with the color scale.
 		vis.values = [];
@@ -84,7 +87,7 @@ class KenyaMap{
 	}
 
 	updateChart(){
-		var vis = this;
+		const vis = this;
 
 		// Define a domain for the color scale
 		vis.radiusVals = vis.totalValCases.map(one => one.cases);
@@ -110,8 +113,8 @@ class KenyaMap{
 		 	})
 		   	.attr("fill", d => {
 			 	if(d.properties.COUNTY_NAM != null && d.properties.COUNTY_COD > 0){
-				 	var county = covid_data.filter(obj => obj.County.toUpperCase() === d.properties.COUNTY_NAM);
-				 	var value = county[0][vis.date];
+				 	const county = covid_data.filter(obj => obj.County.toUpperCase() === d.properties.COUNTY_NAM);
+				 	const value = county[0][vis.date];
 				 	if(county[0] != "Total"){
 				 		return vis.colorScale(value);
 				 	}
@@ -119,8 +122,8 @@ class KenyaMap{
 		 	})
 		 	.attr("data-cases", d => {
 			 	if(d.properties.COUNTY_NAM != null && d.properties.COUNTY_COD > 0){
-				 	var county = covid_data.filter(obj => obj.County.toUpperCase() === d.properties.COUNTY_NAM);
-				 	var value = county[0][vis.date];
+				 	const county = covid_data.filter(obj => obj.County.toUpperCase() === d.properties.COUNTY_NAM);
+				 	const value = county[0][vis.date];
 				 }
 			return value
 		});
@@ -139,9 +142,10 @@ class KenyaMap{
 		 	}
 		 })
 		 .attr("data-cases", d => {
+		 	let value = 0;
 		 	if(d.properties.COUNTY_NAM != null && d.properties.COUNTY_COD > 0){
-			 	var county = covid_data.filter(obj => obj.County.toUpperCase() === d.properties.COUNTY_NAM);
-			 	var value = county[0][vis.date];
+			 	const county = covid_data.filter(obj => obj.County.toUpperCase() === d.properties.COUNTY_NAM);
+			 	value = county[0][vis.date];
 			 }
 			return value
 		 })
@@ -154,8 +158,8 @@ class KenyaMap{
 	      .attr("class", "bubbles")
 	      .attr("r", d => {
 	      	if(d.properties.COUNTY_NAM != null && d.properties.COUNTY_COD > 0){
-			 	var county = vis.totalValCases.filter(obj => obj.county.toUpperCase() === d.properties.COUNTY_NAM);
-			 	var value = county[0].cases;
+			 	const county = vis.totalValCases.filter(obj => obj.county.toUpperCase() === d.properties.COUNTY_NAM);
+			 	const value = county[0].cases;
 			 	if(county[0] != "Total"){
 			 		return vis.radiusScale(value);
 			 	}
@@ -167,12 +171,12 @@ class KenyaMap{
 	      .attr("stroke", "rgba(255, 0, 0, 0.5)")
 	      .on("mouseover", d => {
 		   		// Mouseover effects
-		   		var county = vis.totalValCases.filter(obj => obj.county.toUpperCase() === d.properties.COUNTY_NAM);
+		   		let county = vis.totalValCases.filter(obj => obj.county.toUpperCase() === d.properties.COUNTY_NAM);
 			 	$("#county-name").text(county[0].county.toUpperCase());
 			 	$("#county-cases").text(numbersWithCommas(county[0].cases));
-		   		var county = covid_data.filter(obj => obj.County.toUpperCase() === d.properties.COUNTY_NAM);
-			 	var value = county[0][vis.date];
-		   	    var area = d3.select(event.currentTarget);
+		   		county = covid_data.filter(obj => obj.County.toUpperCase() === d.properties.COUNTY_NAM);
+			 	const value = county[0][vis.date];
+		   	    const area = d3.select(event.currentTarget);
 		   		area.attr("stroke", "rgba(255, 0, 0, 0.5)");
 		   		area.attr("stroke-width", 1);
 		   		area.style("z-index", 1);
@@ -180,7 +184,7 @@ class KenyaMap{
 	      	})
         .on("mouseout", (d) => {
         		// Mouseout effects
-        		var area = d3.select(event.currentTarget);
+        		const area = d3.select(event.currentTarget);
       			toolTip.style("visibility", "hidden");
       			area.style("z-index", 0);
 		 		area.attr("fill", "rgba(255, 0, 0, 0.1)")

@@ -8,7 +8,11 @@ $("document").ready( () => {
 	NProgress.inc();
 
 	// Loading data
-	var promises = [d3.json("https://covid.ourworldindata.org/data/owid-covid-data.json"), d3.json("data/counties.json"), d3.csv("data/kenya_daily_covid.csv"), d3.json("https://pomber.github.io/covid19/timeseries.json")];
+	const promises = [d3.json("https://covid.ourworldindata.org/data/owid-covid-data.json"),
+					  d3.json("data/counties.json"),
+					  d3.csv("data/kenya_daily_covid.csv"),
+					  d3.json("https://pomber.github.io/covid19/timeseries.json")
+	];
 
 	Promise.all(promises).then(data => {
 		// Drawing visualizations
