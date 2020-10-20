@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="Coronavirus dashboard">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<link rel="icon" href="./img/hm_favicon.ico" type="image/ico" sizes="16x16">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" media="screen">
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+		<title>Coronavirus Statistics</title>
+	</head>
+	<body>
+		<div id="pre-loader"></div>
+		<nav class="navbar navbar-light bg-light" id="navigation-bar">
+			<a id="nav-link" class="navbar-brand" href="https://www.hmwawuda.com/">
+				<img src="./img/hm_logo.png" width="35.5" height="34.5" class="d-inline-block align-top" alt="Hammerton Mwawuda Logo" loading="lazy">
+				Coronavirus Statistics
+			</a>
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link" href="#more-info">More Information</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#explore">Explore</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#kenya">Kenya</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-8 offset-md-2 col-sm-12">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<select id="var-select" class="form-control" label="variable-select">
+								<option selected value="new_cases">New Cases</option>
+								<option value="new_deaths">New Deaths</option>
+								<option value="new_tests">New Tests</option>
+								<option value="total_cases">Total Cases</option>
+								<option value="total_deaths">Total Deaths</option>
+								<option value="total_tests">Total Tests</option>
+							</select>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<select id="country-select" class="form-control" label="country-select">
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12" id="bar-parent">
+					<div id="bar"></div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12" id="more-info">
+					<h2 id="more-info-heading">More Information</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<div id="general-info">
+						<h3 id="general-heading"></h3>
+						<i class="fas fa-globe"> </i><p> Continent: <span id="continent" class="font-weight-bold"></span></p>
+						<i class="material-icons">person</i><p> Population: <span id="population" class="font-weight-bold"></span></p>
+						<i class="material-icons">person_add</i><p> Population Density: <span id="pop-den" class="font-weight-bold"></span></p>
+						<i class="far fa-life-ring"></i><p> Life Expectancy: <span id="life" class="font-weight-bold"></span></p>
+						<i class="material-icons">unfold_less</i><p> Median Age: <span id="median-age" class="font-weight-bold"></span></p>
+						<i class="fas fa-walking"></i><p> 65 Older: <span id="older" class="font-weight-bold"></span></p>
+						<i class="material-icons">directions_walk</i><p> 70 Older: <span id="oldest" class="font-weight-bold"></span></p>
+						<i class="fas fa-money-bill-wave-alt"></i><p> GDP per Capita: <span id="gdp" class="font-weight-bold"></span></p>
+						<i class="fas fa-hands-wash"></i><p> Handwashing Facilities Access: <span id="handwash" class="font-weight-bold"></span></p>
+						<i class="fas fa-bed"></i><p> Hospital Beds per Thousand: <span id="beds" class="font-weight-bold"></span></p>
+						<i class="far fa-money-bill-alt"></i><p> Extreme Poverty: <span id="poverty" class="font-weight-bold"></span></p>
+						<i class="material-icons">people</i><p> Diabetes prevalence: <span id="diabetes" class="font-weight-bold"></span></p>
+						<i class="fas fa-calendar-plus"></i><p> Cardiovascular Disease Death Rate: <span id="cvd" class="font-weight-bold"></span></p>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12" id="smokers-parent">
+					<div id="smokers">
+					</div>
+					<div id="about-page">
+						<h3 id="about-heading">About</h3>
+						<p>The information presented on this page comes from data obtained by <a target="_blank" rel="noreferrer" href="https://ourworldindata.org/">ourworldindata.org</a> and other sources.</p>
+						<p><a target="_blank" rel="noreferrer" href="https://ourworldindata.org/">Ourworldindata.org</a> collects data to aid in solving worldwide problems. Their goal is to make knowledge about universal issues accessible and comprehensible.</p>
+						<p>Toggle the selectors on the top of the page to view information on Covid-19 per nation or the world as a whole.</p>
+						<p>Sources of data: <a target="_blank" rel="noreferrer" href="https://github.com/owid">Ourworldindata (owid) Coronavirus GitHub repo</a> and <a target="_blank" rel="noreferrer" href="https://github.com/pomber/covid19"> pomber/covid19 GitHub repo</a>.</p>
+						<p>I personally scrapped and collected Kenyan counties' data.</p>
+						<p>More information on the data: <a target="_blank" rel="noreferrer" href="https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-data-codebook.md">more info here</a> and <a target="_blank" href="https://github.com/pomber/covid19" rel="noreferrer">more info here</a>.</p>
+						<p>Code used to develop this dashboard is open source: <a target="_blank" rel="noreferrer" href="https://github.com/Hammy25/Coronavirus-Dashboard">View code</a>.</p>
+						<p>This work is licensed under the <a target="_blank" rel="noreferrer" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row" id="explore">
+			<div class="col-12">
+				<div id="kenya-heading">
+					<h2>Explore</h2>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12" id="time-series-parent">
+				<div id="time-series">
+					<div class="row">
+						<div class="col-4">
+							<input class="form-control" type="date" name="time-series-date" id="time-series-date-select" label="time-series-date">
+						</div>
+						<div class="col-4">
+							<select class="form-control" name="time-series-continent" id="time-series-continent-select" label="time-series-continent">
+								<option value="world" selected="selected">World</option>
+							</select>
+						</div>
+						<div class="col-4">
+							<select class="form-control" name="time-series-country" id="time-series-country-select" label="time-series-country">
+								<option value="all" selected="selected">All</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row" id="kenya">
+			<div class="col-12">
+				<div id="kenya-heading">
+					<h2>Kenya</h2>
+					<small></small>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3 col-12">
+				<div id="kenya-confirmed">
+					<h4>Confirmed</h4>
+					<div class="kenya-change">
+						<small></small>
+					</div>
+					<div class="kenya-value lead">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-12">
+				<div id="kenya-active">
+					<h4>Active</h4>
+					<div class="kenya-change">
+						<small></small>
+					</div>
+					<div class="kenya-value lead">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-12">
+				<div id="kenya-recovered">
+					<h4>Recovered</h4>
+					<div class="kenya-change">
+						<small></small>
+					</div>
+					<div class="kenya-value lead">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-12">
+				<div id="kenya-deceased">
+					<h4>Deceased</h4>
+					<div class="kenya-change">
+						<small></small>
+					</div>
+					<div class="kenya-value lead">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-12" id="kenya-map-container">
+				<div id="kenya-map">
+					<h3>Confirmed Cases per County</h3>
+					<small id="kenya-last"></small>
+					<div id="active-county" class="text-left">
+						<h4 id="county-name"></h4>
+						<span id="county-cases"></span>
+						<small id="county-confirmed">confirmed</small>
+					</div>
+					<!-- input type="date" name="kenya-date" id="kenya-date" class="form-control"> -->
+				</div>
+			</div>
+			<div class="col-md-4 col-12" id="kenya-details-container">
+				<div id="kenya-details">
+					<h3></h3>
+					<div id="kenya-details-table">
+						<div class="county-row">
+							<div class="county-name text-muted">COUNTY NAME</div>
+							<div class="county-today text-muted">CASES TODAY</div>
+							<div class="county-total text-muted">CASES TOTAL</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- loading page JavaScript -->
+	<script async src="https://kit.fontawesome.com/4cf7efc90c.js" crossorigin="anonymous" rel="preconnect"></script>
+	<script src="nprogress.min.js"></script>
+	<script src="bundle.min.js"></script>
+</body>
+</html>

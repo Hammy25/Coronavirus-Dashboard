@@ -1,0 +1,222 @@
+html,body{
+	 font-family: "Open Sans", sans-serif;
+}
+html {
+  scroll-padding-top: 58px; /* height of sticky header */
+  scroll-behavior: smooth;
+}
+
+/****
+	Styling Preloader
+****/
+
+#pre-loader {
+	position: fixed;
+	left: 0px;
+	top: 2px;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+	overflow: visible;
+	background: #fff url("../img/preloader_2.gif") no-repeat center center;
+}
+
+
+/******
+	Styling for svg-containers and svgs.
+******/
+
+#bar, #smokers, #kenya-map-container, #time-series{
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	padding-bottom: 0;
+	vertical-align: top;
+	overflow: hidden;
+}
+
+.svg-content{
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/******
+	Tooltip styling
+******/
+
+#tooltip{
+  position: absolute;
+  text-align: left;
+  padding: 10px 10px;
+  border-radius: 10px;
+  width: auto;
+  font-size: 14px;
+}
+
+.tooltip-label{
+	color: #494a4a;
+}
+
+/****
+	General Styling
+****/
+
+#more-info-heading{
+	text-decoration: underline;
+	text-align: center;
+}
+
+#smokers-parent, #bar-parent, #kenya-map-container, #time-series-parent{
+	text-align: center;
+}
+
+#bar, #time-series{
+	margin: 20px auto 20px auto;
+	border-radius: 10px;
+	-webkit-box-shadow: -7px 6px 58px 2px rgba(128,128,128,0.4);
+    -moz-box-shadow: -7px 6px 58px 2px rgba(128,128,128, 0.4);
+    box-shadow: -7px 6px 58px 2px rgba(128,128,128,0.4)
+}
+
+.barTitle{
+	font-size: 0.65rem;
+	text-decoration: underline;
+}
+
+#kenya-map, #kenya-details{
+	margin: 20px auto 20px auto;
+	text-align: center;
+	width: 90%;
+	padding: 10px 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: -7px 6px 58px 2px rgba(128,128,128,0.4);
+    -moz-box-shadow: -7px 6px 58px 2px rgba(128,128,128, 0.4);
+    box-shadow: -7px 6px 58px 2px rgba(128,128,128,0.4);	
+}
+
+#kenya-details-table{
+	display: grid;
+	grid-template-columns: 100%;
+	grid-gap: 1px 1px;
+	padding: 10px 10px;
+	border-radius: 10px;
+	font-size: 0.8rem;
+}
+
+div#kenya-details-table div:nth-child(odd) {
+  background-color: rgba(129, 129, 129, 0.1);
+}
+
+.county-row{
+	display: grid;
+	grid-template-columns: 50% 25% 25%;
+	border-bottom: 0.5px solid grey;
+}
+
+.county-name{
+	text-align: left;
+	width: 100%;
+	border-right: 0.5px solid grey;
+	padding-left: 5px;
+}
+
+.county-today{
+	border-right: 0.5px solid grey;
+}
+
+.county-today, .county-total {
+	text-align: right;
+	width: 100%;
+	padding-right: 5px;
+}
+
+#general-info, #smokers, #about-page{
+	margin: 20px auto 20px auto;
+	text-align: center;
+	width: 75%;
+	padding: 10px 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: -7px 6px 58px 2px rgba(128,128,128,0.4);
+    -moz-box-shadow: -7px 6px 58px 2px rgba(128,128,128, 0.4);
+    box-shadow: -7px 6px 58px 2px rgba(128,128,128,0.4);
+}
+
+#kenya-confirmed, #kenya-active, #kenya-recovered, #kenya-deceased{
+	margin: 20px auto 20px auto;
+	text-align: center;
+	width: 75%;
+	padding: 10px 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: -4px 3px 58px 2px rgba(128,128,128,0.4);
+    -moz-box-shadow: -4px 3px 58px 2px rgba(128,128,128, 0.4);
+    box-shadow: -4px 3px 58px 2px rgba(128,128,128,0.4);	
+}
+
+#kenya-confirmed, #kenya-active, #kenya-recovered, #kenya-deceased{
+	text-align: center;
+}
+
+#kenya-confirmed{
+	color: red;
+	background-color: rgba(255, 0, 0, 0.1);
+}
+
+#kenya-active{
+	color: blue;
+	background-color: rgba(0, 0, 255, 0.1)
+}
+
+#kenya-recovered{
+	color: green;
+	background-color: rgba(0, 128, 0, 0.1)
+}
+
+#kenya-deceased{
+	color: grey;
+	background-color: rgba(129, 129, 129, 0.1)
+}
+
+#about-page p, #general-info i, #general-info p{
+	color: #6c757d;
+}
+
+#continent, #population, #pop-den, #life, #median-age, 
+#older, #oldest, #gdp, #handwash, #beds, #poverty,
+#diabetes, #cvd{
+	color: #212529 !important;
+}
+
+#about-heading{
+	text-decoration: underline;
+}
+#general-info #general-heading{
+	text-decoration: underline;
+}
+
+i{
+	vertical-align: middle;
+	font-size: 1rem;
+	display: inline;
+}
+
+#kenya-heading{
+	text-align: center;
+}
+
+#time-series-continent-select, #time-series-date-select, #time-series-country-select{
+	width: 90%;
+	margin: 10px auto 10px auto;
+}
+
+h1, h2, h3{
+	text-decoration: underline;
+}
+
+#active-county{
+	margin: 0px auto;
+	text-align: left;
+	color: red;
+	font-weight: bolder;
+}

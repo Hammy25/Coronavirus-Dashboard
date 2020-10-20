@@ -20,7 +20,7 @@ The dashboard consists of the follwing displays/sections:
 
 ## Screenshot
 
-![Dashboard](./img/coronavirus_dashboard.png "Dashboard.")
+![Dashboard](./coronavirus_dashboard.png "Dashboard.")
 
 
 ## Website

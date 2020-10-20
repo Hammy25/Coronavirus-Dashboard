@@ -1,2 +1,10 @@
 # untracked files
 no_cache_server.py
+package-lock.json
+yarn-error.log
+yarn.lock
+public/data/owid-covid-data.json
+public/data/timeseries.json
+
+# untracked folders
+node_modules
