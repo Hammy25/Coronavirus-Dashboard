@@ -13,7 +13,7 @@ const formatTime_2 = d3.timeFormat("%Y-%m-%d");
 
 //  Add commas to digits for display
 const numbersWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x != undefined ? x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0;
 };
 
 // Format time to be displayed on dashboards

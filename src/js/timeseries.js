@@ -177,11 +177,11 @@ export default class TimeSeries{
 		   .attr("data-country", d => d.country)
 		   .attr("data-deaths", d =>{
 			   	let totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
-			   	return((totalDeaths.length > 0) ? vis.yScale(totalDeaths[0].total_deaths) : 0);		
+			   	return((totalDeaths.length > 0) ? totalDeaths[0].total_deaths : 0);		
 		   	})
 		   .attr("data-cases", d => {
 		   		const totalCase = d.cases.filter(one => one.date == vis.chosenDate);
-		   		return((totalCase.length > 0) ? vis.yScale(totalCase[0].total_cases) : null);			
+		   		return((totalCase.length > 0) ? totalCase[0].total_cases : 0);			
 		   	})
 		   .attr("stroke", "grey")
 		   .on("mouseover", d => {
@@ -224,16 +224,15 @@ export default class TimeSeries{
     	   .transition(vis.t())
     	   .attr("cx", d => {
 		   		const totalCase = d.cases.filter(one => one.date == vis.chosenDate);
-		   		return((totalCase.length > 0) ? vis.xScale(totalCase[0].total_cases) : null)
+		   		return((totalCase.length > 0 && totalCase[0].total_deaths >= 0) ? vis.xScale(totalCase[0].total_cases) : null)
 		   })
 		   .attr("cy", d => {
 		   		const totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
-		   		return((totalDeaths.length > 0) ? vis.yScale(totalDeaths[0].total_deaths) : null);		
+		   		return((totalDeaths.length > 0 && totalDeaths[0].total_cases >= 0) ? vis.yScale(totalDeaths[0].total_deaths) : null);		
 		   })
 		   .attr("r", d => {
 			   	const totalCase = d.cases.filter(one => one.date == vis.chosenDate);
-			   	const totalDeaths = d.cases.filter(one => one.date == vis.chosenDate);
-			   	return((totalDeaths[0] != undefined && totalCase[0] != undefined) ? vis.radiusScale(d.population) : 0);
+			   	return((totalCase[0] != undefined && (totalCase[0].total_deaths != undefined && totalCase[0].total_cases != undefined)) ? vis.radiusScale(d.population) : 0);
 		   })
 		   .attr("fill", d => {
 		   		return(vis.continentColor(d.continent))
