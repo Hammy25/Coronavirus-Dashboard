@@ -125,10 +125,7 @@ export default class DonutChart{
 				            	" SMOKERS" +
 				            	"</u></span>" +
 				            	"<br>" +
-				            	"<span>" +
-				            	d.data.count +
-				            	" million." + 
-				            	"</span>"
+				            	`<span>${d.data.count}% of adult population.</span>`
 				            )});
 				        	toolTip.style("left", d3.event.pageX + "px");
         					toolTip.style("top", d3.event.pageY + "px");

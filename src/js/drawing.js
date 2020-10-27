@@ -56,17 +56,17 @@ const worldIntialize = (data) => {
 const editInformation = (d) => {
 	d.location === "World" ? $("#continent").text(d.location) : $("#continent").text(d.continent);
 	$("#population").text(d.population === undefined ? "N/A" : numbersWithCommas(d.population));
-	$("#pop-den").text(d.population_density === undefined ? "N/A" : d.population_density);
+	$("#pop-den").text(d.population_density === undefined ? "N/A" : d.population_density + " per square km");
 	$("#median-age").text( d.median_age === undefined ? "N/A" : d.median_age);
 	$("#older").text( d.aged_65_older === undefined ? "N/A" : d.aged_65_older + "%");
 	$("#oldest").text( d.aged_70_older === undefined ? "N/A" : d.aged_70_older + "%");
-	$("#gdp").text( d.gdp_per_capita === undefined ? "N/A" : numbersWithCommas(d.gdp_per_capita));
+	$("#gdp").text( d.gdp_per_capita === undefined ? "N/A" : "$" + numbersWithCommas(d.gdp_per_capita));
 	$("#handwash").text( d.handwashing_facilities === undefined ? "N/A" : d.handwashing_facilities + "%");
 	$("#beds").text( d.hospital_beds_per_thousand === undefined ? "N/A" : d.hospital_beds_per_thousand);
 	$("#poverty").text( d.extreme_poverty === undefined ? "N/A" : d.extreme_poverty + "%");
-	$("#diabetes").text( d.diabetes_prevalence === undefined ? "N/A" : d.diabetes_prevalence);
+	$("#diabetes").text( d.diabetes_prevalence === undefined ? "N/A" : d.diabetes_prevalence + "% of population aged 20 to 79");
 	$("#life").text( d.life_expectancy === undefined ? "N/A" : d.life_expectancy);
-	$("#cvd").text( d.cardiovasc_death_rate === undefined ? "N/A" : d.cardiovasc_death_rate);
+	$("#cvd").text( d.cardiovasc_death_rate === undefined ? "N/A" : d.cardiovasc_death_rate + " deaths per 100,000 people");
 	$("#general-heading").text(d.location + " General Information")
 };
 
