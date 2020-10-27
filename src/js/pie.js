@@ -4,6 +4,7 @@
 
 import $ from "jquery";
 import * as d3 from "d3";
+import toolTip from "./tooltip";
 import {allData} from "./drawing";
 
 // Defining donut-chart class
@@ -110,7 +111,33 @@ export default class DonutChart{
 	       .duration(750)
 	       .attrTween("d", arcTween);
 
-		vis.pieChart =vis.curves.enter().append("g").attr("class", "arc");
+		vis.pieChart = vis.curves.enter()
+						  .append("g")
+						  .attr("class", "arc")
+						  .style("cursor", "pointer")
+						  .on("mouseover", d => {
+						  	toolTip.style("visibility", "visible");
+			      			toolTip.style("text-align", "left")
+				      		toolTip.html( () => {
+				            return(
+				            	"<span class=\"tooltip-label\"><u>" +
+				            	d.data.gender.toUpperCase() +
+				            	" SMOKERS" +
+				            	"</u></span>" +
+				            	"<br>" +
+				            	"<span>" +
+				            	d.data.count +
+				            	" million." + 
+				            	"</span>"
+				            )});
+				        	toolTip.style("left", d3.event.pageX + "px");
+        					toolTip.style("top", d3.event.pageY + "px");
+	       				  })
+	       				  .on("mouseout", d => {
+			        		// Mouseout effects
+			      			toolTip.style("visibility", "hidden");
+    					  });
+
 
 
 		vis.pieChart.append("path")

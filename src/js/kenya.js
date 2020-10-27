@@ -176,6 +176,7 @@ export default class KenyaMap{
 	      .attr("cy", function(d) { return vis.geoGenerator.centroid(d)[1] })
 	      .attr("fill", "rgba(255, 0, 0, 0.1)")
 	      .attr("stroke", "rgba(255, 0, 0, 0.5)")
+	      .style("cursor", "pointer")
 	      .on("mouseover", d => {
 		   		// Mouseover effects
 		   		let county = vis.totalValCases.filter(obj => obj.county.toUpperCase() === d.properties.COUNTY_NAM);

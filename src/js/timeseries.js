@@ -184,6 +184,7 @@ export default class TimeSeries{
 		   		return((totalCase.length > 0) ? totalCase[0].total_cases : 0);			
 		   	})
 		   .attr("stroke", "grey")
+		   .style("cursor", "pointer")
 		   .on("mouseover", d => {
 		   		// Mouseover effects
 		   		const totalCase = d.cases.filter(one => one.date == vis.chosenDate)

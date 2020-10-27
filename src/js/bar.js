@@ -136,6 +136,7 @@ export default class BarChart{
 		   .attr("y", d => vis.yScale(d[vis.key]))
 		   .attr("width", (vis.width/vis.data.length))
 		   .attr("height", d => vis.height - vis.yScale(d[vis.key]))
+		   .style("cursor", "pointer")
 		   .on("mouseover", d => {
 		   		// Mouseover effects
 		   	    const bar = d3.select(event.currentTarget);
