@@ -1,5 +1,8 @@
 import $ from "jquery";
 import * as d3 from "d3";
+import React from "react";
+import ReactDOM from "react-dom";
+import Dashboard from "./js/components/Dashboard";
 import {worldIntialize,
 		drawTimeSeries,
 		populateKenyaSummary,
@@ -8,11 +11,14 @@ import {worldIntialize,
 		barChart,
 		timeline,
 		smokersPieChart,
-		timeseries} from "./js/drawing";
+		timeseries} from "./js/visualizations/drawing";
 import "normalize.css/normalize.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/nprogress.css";
 import "./css/style.css";
+
+ReactDOM.render(<Dashboard />, document.getElementById("app"));
+
 
 // Event handling
 $("#var-select").on("change", () => {
