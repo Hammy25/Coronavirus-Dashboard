@@ -18,12 +18,12 @@ export default () => (
 						</div>
 						<div className="col-4">
 							<select className="form-control" name="time-series-continent" id="time-series-continent-select" label="time-series-continent">
-								<option value="world" selected="selected">World</option>
+								<option defaultValue="world" selected="selected">World</option>
 							</select>
 						</div>
 						<div className="col-4">
 							<select className="form-control" name="time-series-country" id="time-series-country-select" label="time-series-country">
-								<option value="all" selected="selected">All</option>
+								<option defaultValue="all" selected="selected">All</option>
 							</select>
 						</div>
 					</div>

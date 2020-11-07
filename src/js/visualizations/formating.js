@@ -93,6 +93,10 @@ const determineTitle = (key) => {
 };
 
 
+// Add sign infront of number
+const addSign = (theNumber) => (theNumber > 0 ? ("+" + theNumber) : theNumber.toString());
+
+
 export {
 	timeParser,
 	timeParser2,
@@ -102,5 +106,6 @@ export {
 	formatForDisplay,
 	formatForDisplay_2,
 	formatData,
-	determineTitle
+	determineTitle,
+	addSign
 };

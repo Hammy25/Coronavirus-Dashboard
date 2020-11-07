@@ -70,31 +70,6 @@ const editInformation = (d) => {
 	$("#general-heading").text(d.location + " General Information")
 };
 
-// Kenya summary displays
-const populateKenyaSummary = (data) => {
-	const addSign = (theNumber) => (theNumber > 0 ? ("+" + theNumber) : theNumber.toString());
-	const workingData = data["Kenya"];
-	const last = workingData[workingData.length-1];
-	const secondLast = workingData[workingData.length-2];
-	const todayConfirmed = last.confirmed;
-	const todayDeaths = last.deaths;
-	const todayRecovered = last.recovered;
-	const todayActive = last.confirmed - last.recovered - last.deaths;
-	const todayConfirmedChange = last.confirmed - secondLast.confirmed;
-	const todayDeathsChange = last.deaths - secondLast.deaths;
-	const todayRecoveredChange = last.recovered - secondLast.recovered;
-	const todayActiveChange = todayActive - (secondLast.confirmed - secondLast.recovered - secondLast.deaths);
-	$("#kenya-heading small").text("Last update: " + formatForDisplay_2(last.date));
-	$("#kenya-confirmed small").text(numbersWithCommas(addSign(todayConfirmedChange)));
-	$("#kenya-active small").text(numbersWithCommas(addSign(todayActiveChange)));
-	$("#kenya-recovered small").text(numbersWithCommas(addSign(todayRecoveredChange)));
-	$("#kenya-deceased small").text(numbersWithCommas(addSign(todayDeathsChange)));
-	$("#kenya-confirmed .kenya-value").text(numbersWithCommas(todayConfirmed));
-	$("#kenya-active .kenya-value").text(numbersWithCommas(todayActive));
-	$("#kenya-recovered .kenya-value").text(numbersWithCommas(todayRecovered));
-	$("#kenya-deceased .kenya-value").text(numbersWithCommas(todayDeaths));
-};
-
 //  Draw the Kenya map
 const drawMap = (ke, c_data) => {
 
@@ -257,7 +232,6 @@ const drawTimeSeries = (data) => {
 export {
 	worldIntialize,
 	drawTimeSeries,
-	populateKenyaSummary,
 	drawMap,
 	populateDetails,
 	allCases,

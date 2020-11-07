@@ -17,8 +17,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/nprogress.css";
 import "./css/style.css";
 
+// Reader the dashboard
 ReactDOM.render(<Dashboard />, document.getElementById("app"));
-
 
 // Event handling
 $("#var-select").on("change", () => {
@@ -56,15 +56,13 @@ $("document").ready( () => {
 	// Loading data
 	const promises = [d3.json("/data/owid-covid-data.json"),
 					  d3.json("/data/counties.json"),
-					  d3.csv("/data/kenya_daily_covid.csv"),
-					  d3.json("/data/timeseries.json")
+					  d3.csv("/data/kenya_daily_covid.csv")
 	];
 
 	Promise.all(promises).then(data => {
 		// Drawing visualizations
 		worldIntialize(data[0]);
 		drawTimeSeries(data[0]);
-		populateKenyaSummary(data[3]);
 		drawMap(data[1], data[2]);
 		populateDetails(data[2]);
 		setTimeout( () => {

@@ -1,57 +1,9 @@
 import React from "react";
+import KenyaSummary from "./KenyaSummary";
 
 export default () => (
 	<div className="container-fluid">
-		<div className="row" id="kenya">
-			<div className="col-12">
-				<div id="kenya-heading">
-					<h2>Kenya</h2>
-					<small></small>
-				</div>
-			</div>
-		</div>
-		<div className="row">
-			<div className="col-md-3 col-12">
-				<div id="kenya-confirmed">
-					<h4>Confirmed</h4>
-					<div className="kenya-change">
-						<small></small>
-					</div>
-					<div className="kenya-value lead">
-					</div>
-				</div>
-			</div>
-			<div className="col-md-3 col-12">
-				<div id="kenya-active">
-					<h4>Active</h4>
-					<div className="kenya-change">
-						<small></small>
-					</div>
-					<div className="kenya-value lead">
-					</div>
-				</div>
-			</div>
-			<div className="col-md-3 col-12">
-				<div id="kenya-recovered">
-					<h4>Recovered</h4>
-					<div className="kenya-change">
-						<small></small>
-					</div>
-					<div className="kenya-value lead">
-					</div>
-				</div>
-			</div>
-			<div className="col-md-3 col-12">
-				<div id="kenya-deceased">
-					<h4>Deceased</h4>
-					<div className="kenya-change">
-						<small></small>
-					</div>
-					<div className="kenya-value lead">
-					</div>
-				</div>
-			</div>
-		</div>
+		<KenyaSummary />
 		<div className="row">
 			<div className="col-md-8 col-12" id="kenya-map-container">
 				<div id="kenya-map">
@@ -60,7 +12,7 @@ export default () => (
 					<div id="active-county" className="text-left">
 						<h4 id="county-name"></h4>
 						<span id="county-cases"></span>
-						<small id="county-confirmed">confirmed</small>
+						<small id="county-confirmed"> confirmed</small>
 					</div>
 				</div>
 			</div>

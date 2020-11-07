@@ -67,7 +67,7 @@ export default class Timeline{
 
 	// Wrangle Data
 	wrangleData(){
-		var vis = this;
+		const vis = this;
 
 		vis.variable = $("#var-select").val();
 		vis.country = $("#country-select").val();
