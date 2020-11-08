@@ -172,8 +172,8 @@ export default class KenyaMap{
 			 	}
 		 	}
 	      })
-	      .attr("cx", function(d) { return vis.geoGenerator.centroid(d)[0] })
-	      .attr("cy", function(d) { return vis.geoGenerator.centroid(d)[1] })
+	      .attr("cx", d => (vis.geoGenerator.centroid(d)[0]))
+	      .attr("cy", d => (vis.geoGenerator.centroid(d)[1]))
 	      .attr("fill", "rgba(255, 0, 0, 0.1)")
 	      .attr("stroke", "rgba(255, 0, 0, 0.5)")
 	      .style("cursor", "pointer")
@@ -204,8 +204,8 @@ export default class KenyaMap{
 		.enter()
 		.append("circle")
 		.attr("cx", vis.width-200)
-		.attr("cy", (d) => { return (vis.height-200) - vis.radiusScale(d) } )
-		.attr("r", (d) => { return vis.radiusScale(d) })
+		.attr("cy", d => ((vis.height-200) - vis.radiusScale(d)))
+		.attr("r", d => (vis.radiusScale(d)))
 		.attr("fill", "none")
 		.attr("stroke", "rgba(255, 0, 0, 0.5)")
 
@@ -213,10 +213,10 @@ export default class KenyaMap{
 		.data(vis.radiusScale.ticks(4))
 		.enter()
 		.append("line")
-	    .attr("x1", (d) =>{ return vis.width-200 + vis.radiusScale(d) } )
+	    .attr("x1", d => (vis.width-200 + vis.radiusScale(d)))
 	    .attr("x2", vis.width-100)
-	    .attr("y1", (d) => { return (vis.height-200) - vis.radiusScale(d) } )
-	    .attr("y2", (d) => { return (vis.height-200) - vis.radiusScale(d) } )
+	    .attr("y1", d => ((vis.height-200) - vis.radiusScale(d)))
+	    .attr("y2", d => ((vis.height-200) - vis.radiusScale(d)))
 	    .attr("stroke", "grey")
 	    .attr("stroke-dasharray", ("2,2"))
 
@@ -227,8 +227,8 @@ export default class KenyaMap{
 	 	.style("color", "grey")
 	    .attr("class", "text-muted")
  	    .attr("x", vis.width-100)
-	    .attr("y", (d) => (vis.height-200) - vis.radiusScale(d) )
-	    .text( (d) => numbersWithCommas(d) )
+	    .attr("y", d => (vis.height-200) - vis.radiusScale(d) )
+	    .text( d => numbersWithCommas(d) )
 	    .attr("font-size", "0.5rem");
 	}
 }

@@ -19,7 +19,7 @@ export default class KenyaSummary extends React.Component{
 				yesterday: data.Kenya[data.Kenya.length - 2]
 			})
 			);
-		})
+		});
 	}
 
 	render(){

@@ -5,7 +5,6 @@ import ReactDOM from "react-dom";
 import Dashboard from "./js/components/Dashboard";
 import {worldIntialize,
 		drawTimeSeries,
-		populateKenyaSummary,
 		drawMap,
 		populateDetails,
 		barChart,

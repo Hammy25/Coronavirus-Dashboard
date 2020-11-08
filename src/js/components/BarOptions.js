@@ -1,7 +1,12 @@
 import React from "react";
 
-export default () => (
-		<div className="container-fluid">
+export default class BarOptions extends React.Component{
+	constructor(props){
+		super(props);
+	}
+
+	render(){
+		return(
 			<div className="row">
 				<div className="col-md-8 offset-md-2 col-sm-12">
 					<div className="row">
@@ -22,5 +27,6 @@ export default () => (
 					</div>
 				</div>
 			</div>
-		</div>
-);
+		);
+	}
+}
