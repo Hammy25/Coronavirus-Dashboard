@@ -91,7 +91,7 @@ export default class TimeSeries{
 
 		// Getting Continents for our color scale
 		wrkData.forEach(country => {
-			if(vis.continents.indexOf(country.continent) < 0){
+			if(vis.continents.indexOf(country.continent) < 0 && country.continent !== undefined){
 				vis.continents.push(country.continent);
 			}
 		});
@@ -121,7 +121,7 @@ export default class TimeSeries{
 				vis.data = wrkData.filter(country => country.continent == "Oceania");
 				break;
 			default:
-				vis.data = wrkData;
+				vis.data = wrkData.filter(country => country.continent !== undefined);
 				break;
 		}
 		

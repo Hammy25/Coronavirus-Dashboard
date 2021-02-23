@@ -190,7 +190,7 @@ const drawTimeSeries = (data) => {
 	let countries = [];
 	
 	wrkData.forEach(country => {
-		if(continents.indexOf(country.continent) < 0){
+		if(continents.indexOf(country.continent) < 0 && country.continent !== undefined){
 			continents.push(country.continent);
 		}
 		// if(countries.indexOf(country.country) < 0){
