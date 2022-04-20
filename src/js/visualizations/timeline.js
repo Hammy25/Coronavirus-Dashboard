@@ -79,7 +79,6 @@ export default class Timeline{
 
 	    vis.dataFiltered = vis.dayNest
 	        .map(function(day){
-	        	// console.log(day);
 	            return {
 	                date: day.key,
 	                sum: day.values.reduce(function(accumulator, current){

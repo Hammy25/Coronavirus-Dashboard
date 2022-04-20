@@ -24,7 +24,7 @@ export default class KenyaSummary extends React.Component{
 
 	render(){
 		return(
-			<div>
+			<div className="container-fluid">
 				<div className="row" id="kenya">
 					<div className="col-12">
 						<div id="kenya-heading">

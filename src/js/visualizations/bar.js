@@ -62,6 +62,7 @@ export default class BarChart{
 		vis.code = $("#country-select").val();
 
 		if(values != undefined){
+			console.log(allCases[vis.code]);
   			vis.data = formatData(allCases[vis.code].data.filter(function(d){
       		return ((d.date > values[0]) && (d.date < values[1]))
   		}));

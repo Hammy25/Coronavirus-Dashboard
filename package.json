@@ -1,12 +1,12 @@
 {
   "name": "Coronavirus-Dashboard",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "author": "Hammerton Mwawuda",
   "license": "CC-BY-4.0",
   "scripts": {
     "serve": "live-server ./public/ --watch",
     "build": "webpack --watch",
-    "dev-server": "webpack serve --config webpack.dev.js --watch",
+    "dev-server": "webpack serve --config webpack.dev.js",
     "web-prod": "webpack --config webpack.prod.js"
   },
   "dependencies": {
@@ -19,7 +19,7 @@
     "topojson": "3.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^6.26.0",
+    "@babel/cli": "^7.0.0",
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",

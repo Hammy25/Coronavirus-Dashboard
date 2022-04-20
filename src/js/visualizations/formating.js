@@ -29,6 +29,7 @@ const formatForDisplay_2 = (time) => {
 
 // Format Data
 const formatData = (data) => {
+	// console.log(data);
 	data.forEach( item => {
 		if(typeof item.date === "string"){
 			item.date = timeParser(item.date);
